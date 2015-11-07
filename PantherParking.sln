@@ -1,0 +1,76 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{F2F1B226-436D-481F-A973-78BCCBAE5F6E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{FD8872C6-E492-411D-B5BA-89E624DFBAE0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PantherParking.Data", "Data\PantherParking.Data\PantherParking.Data.csproj", "{C50FB7DF-0AF4-4384-ADFC-F147BA984E0F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Assets", "Assets", "{7016A864-029A-43D2-BC55-0E847692195B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PantherParking.Services", "Data\PantherParking.Services\PantherParking.Services.csproj", "{622A34EA-E965-4616-9170-AC21E5ECA2BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PantherParking.Web.Wcf", "Web\PantherParking.Web.Wcf\PantherParking.Web.Wcf.csproj", "{0CABB574-EFDD-46C8-BD1D-C66CB3DD9793}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "StructureMap", "StructureMap", "{F9770650-4097-4BC8-A930-F74F1CAF9F71}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.6.1", "2.6.1", "{5A6735A1-89A7-435B-BB30-EC818A445CD5}"
+	ProjectSection(SolutionItems) = preProject
+		Assets\StructureMap\2.6.1\StructureMap.dll = Assets\StructureMap\2.6.1\StructureMap.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pqsk", "pqsk", "{36935BDE-8337-4D92-AE75-8662FB52CEED}"
+	ProjectSection(SolutionItems) = preProject
+		Assets\pqsk\ClosedXML.dll = Assets\pqsk\ClosedXML.dll
+		Assets\pqsk\ClosedXML.xml = Assets\pqsk\ClosedXML.xml
+		Assets\pqsk\DocumentFormat.OpenXml.dll = Assets\pqsk\DocumentFormat.OpenXml.dll
+		Assets\pqsk\Elmah.dll = Assets\pqsk\Elmah.dll
+		Assets\pqsk\Elmah.pdb = Assets\pqsk\Elmah.pdb
+		Assets\pqsk\Elmah.xml = Assets\pqsk\Elmah.xml
+		Assets\pqsk\Ionic.Zip.Reduced.dll = Assets\pqsk\Ionic.Zip.Reduced.dll
+		Assets\pqsk\JetBrains.Annotations.dll = Assets\pqsk\JetBrains.Annotations.dll
+		Assets\pqsk\JetBrains.Annotations.xml = Assets\pqsk\JetBrains.Annotations.xml
+		Assets\pqsk\JsParserCore.dll = Assets\pqsk\JsParserCore.dll
+		Assets\pqsk\Microsoft.JScript.Compiler.dll = Assets\pqsk\Microsoft.JScript.Compiler.dll
+		Assets\pqsk\Microsoft.Vsa.dll = Assets\pqsk\Microsoft.Vsa.dll
+		Assets\pqsk\Microsoft.Vsa.xml = Assets\pqsk\Microsoft.Vsa.xml
+		Assets\pqsk\Pqsk.Helper.dll = Assets\pqsk\Pqsk.Helper.dll
+		Assets\pqsk\Pqsk.Helper.dll.config = Assets\pqsk\Pqsk.Helper.dll.config
+		Assets\pqsk\Pqsk.Helper.pdb = Assets\pqsk\Pqsk.Helper.pdb
+		Assets\pqsk\System.Data.SqlServerCe.dll = Assets\pqsk\System.Data.SqlServerCe.dll
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C50FB7DF-0AF4-4384-ADFC-F147BA984E0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C50FB7DF-0AF4-4384-ADFC-F147BA984E0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C50FB7DF-0AF4-4384-ADFC-F147BA984E0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C50FB7DF-0AF4-4384-ADFC-F147BA984E0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{622A34EA-E965-4616-9170-AC21E5ECA2BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{622A34EA-E965-4616-9170-AC21E5ECA2BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{622A34EA-E965-4616-9170-AC21E5ECA2BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{622A34EA-E965-4616-9170-AC21E5ECA2BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CABB574-EFDD-46C8-BD1D-C66CB3DD9793}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CABB574-EFDD-46C8-BD1D-C66CB3DD9793}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CABB574-EFDD-46C8-BD1D-C66CB3DD9793}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CABB574-EFDD-46C8-BD1D-C66CB3DD9793}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C50FB7DF-0AF4-4384-ADFC-F147BA984E0F} = {F2F1B226-436D-481F-A973-78BCCBAE5F6E}
+		{622A34EA-E965-4616-9170-AC21E5ECA2BB} = {F2F1B226-436D-481F-A973-78BCCBAE5F6E}
+		{0CABB574-EFDD-46C8-BD1D-C66CB3DD9793} = {FD8872C6-E492-411D-B5BA-89E624DFBAE0}
+		{F9770650-4097-4BC8-A930-F74F1CAF9F71} = {7016A864-029A-43D2-BC55-0E847692195B}
+		{5A6735A1-89A7-435B-BB30-EC818A445CD5} = {F9770650-4097-4BC8-A930-F74F1CAF9F71}
+		{36935BDE-8337-4D92-AE75-8662FB52CEED} = {7016A864-029A-43D2-BC55-0E847692195B}
+	EndGlobalSection
+EndGlobal
