@@ -2,7 +2,7 @@
 
 namespace PantherParking.Data.DAL.Repositories
 {
-    public class PantherParkingRepository : IPantherParkingRepository
+    public class LocationRepository : BaseRepository, ILocationRepository
     {
          
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PantherParking.Services
 {
-    public class Class1
+    public class ServiceRegistry
     {
     }
 }

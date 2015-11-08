@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="StructureMap">
+      <HintPath>..\..\Assets\StructureMap\2.6.1\StructureMap.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,14 +43,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="DAL\Interfaces\IPantherParkingRepository.cs" />
-    <Compile Include="DAL\Repositories\PantherParkingRepository.cs" />
+    <Compile Include="DAL\Interfaces\IAdministrationRepository.cs" />
+    <Compile Include="DAL\Interfaces\IHistoricalDataRepository.cs" />
+    <Compile Include="DAL\Interfaces\ILocationRepository.cs" />
+    <Compile Include="DAL\Interfaces\IRegistrationRepository.cs" />
+    <Compile Include="DAL\Repositories\AdministrationRepository.cs" />
+    <Compile Include="DAL\Repositories\BaseRepository.cs" />
+    <Compile Include="DAL\Repositories\HistoricalDataRepository.cs" />
+    <Compile Include="DAL\Repositories\LocationRepository.cs" />
+    <Compile Include="DAL\Repositories\RegistrationRepository.cs" />
+    <Compile Include="DataRegistry.cs" />
+    <Compile Include="DAL\Interfaces\ILoginRepository.cs" />
+    <Compile Include="DAL\Repositories\LoginRepository.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

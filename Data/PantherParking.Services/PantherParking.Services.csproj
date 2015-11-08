@@ -40,15 +40,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Registration\IRegistrationService.cs" />
+    <Compile Include="Registration\RegistrationService.cs" />
+    <Compile Include="ServiceRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Administration\" />
-    <Folder Include="Historical\" />
+    <Folder Include="HistoricalData\" />
     <Folder Include="Location\" />
     <Folder Include="Login\" />
-    <Folder Include="Registration\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PantherParking.Data\PantherParking.Data.csproj">
+      <Project>{c50fb7df-0af4-4384-adfc-f147ba984e0f}</Project>
+      <Name>PantherParking.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,6 +1,6 @@
 ﻿namespace PantherParking.Data.DAL.Interfaces
 {
-    public interface IPantherParkingRepository
+    public interface IAdministrationRepository
     {
          
     }
