@@ -4,7 +4,7 @@ namespace PantherParking.Services.Registration
 {
     public class RegistrationService : IRegistrationService
     {
-        private IRegistrationRepository registrationRepository;
+        private readonly IRegistrationRepository registrationRepository;
 
         public RegistrationService(IRegistrationRepository registrationRepository)
         {

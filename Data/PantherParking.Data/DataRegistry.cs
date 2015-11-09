@@ -14,6 +14,10 @@ namespace PantherParking.Data
         public DataRegistry()
         {
             For<ILoginRepository>().Use<LoginRepository>();
+            For<IAdministrationRepository>().Use<AdministrationRepository>();
+            For<IHistoricalDataRepository>().Use<HistoricalDataRepository>();
+            For<ILocationRepository>().Use<LocationRepository>();
+            For<IRegistrationRepository>().Use<RegistrationRepository>();
         }
     }
 }

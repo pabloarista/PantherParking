@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="StructureMap">
+      <HintPath>..\..\Assets\StructureMap\2.6.1\StructureMap.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Login\ILoginService.cs" />
+    <Compile Include="Login\LoginService.cs" />
     <Compile Include="Registration\IRegistrationService.cs" />
     <Compile Include="Registration\RegistrationService.cs" />
     <Compile Include="ServiceRegistry.cs" />
@@ -49,7 +54,6 @@
     <Folder Include="Administration\" />
     <Folder Include="HistoricalData\" />
     <Folder Include="Location\" />
-    <Folder Include="Login\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PantherParking.Data\PantherParking.Data.csproj">
