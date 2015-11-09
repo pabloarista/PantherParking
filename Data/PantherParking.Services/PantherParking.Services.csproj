@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HistoricalData\HistoricalDataService.cs" />
+    <Compile Include="HistoricalData\IHistoryicalDataService.cs" />
     <Compile Include="Login\ILoginService.cs" />
     <Compile Include="Login\LoginService.cs" />
     <Compile Include="Registration\IRegistrationService.cs" />
@@ -52,7 +54,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Administration\" />
-    <Folder Include="HistoricalData\" />
     <Folder Include="Location\" />
   </ItemGroup>
   <ItemGroup>
