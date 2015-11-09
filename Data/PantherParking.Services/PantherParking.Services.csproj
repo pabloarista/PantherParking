@@ -43,8 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Administration\AdministrationService.cs" />
+    <Compile Include="Administration\IAdministrationService.cs" />
     <Compile Include="HistoricalData\HistoricalDataService.cs" />
     <Compile Include="HistoricalData\IHistoryicalDataService.cs" />
+    <Compile Include="Location\ILocationService.cs" />
+    <Compile Include="Location\LocationService.cs" />
     <Compile Include="Login\ILoginService.cs" />
     <Compile Include="Login\LoginService.cs" />
     <Compile Include="Registration\IRegistrationService.cs" />
@@ -52,10 +56,7 @@
     <Compile Include="ServiceRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Administration\" />
-    <Folder Include="Location\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\PantherParking.Data\PantherParking.Data.csproj">
       <Project>{c50fb7df-0af4-4384-adfc-f147ba984e0f}</Project>

@@ -1,9 +1,10 @@
 ﻿using System;
 
-namespace PantherParking.Data.DAL.Interfaces
+namespace PantherParking.Services.Administration
 {
-    public interface IAdministrationRepository
+    public interface IAdministrationService
     {
+
         bool SetStartDate(DateTime begin);
         bool SetEndDate(DateTime end);
         bool SetHoliday(DateTime holiday);

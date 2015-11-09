@@ -1,6 +1,6 @@
-﻿namespace PantherParking.Data.DAL.Interfaces
+﻿namespace PantherParking.Services.Location
 {
-    public interface ILocationRepository
+    public interface ILocationService
     {
         bool CheckIn(string username, int lot);
         bool CheckOut(string username);
