@@ -7,8 +7,8 @@ using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml.Linq;
 using PantherParking.Data.Models.enumerations;
-using Pqsk.Helper;
-using Pqsk.Helper.Xml;
+//using Pqsk.Helper;
+//using Pqsk.Helper.Xml;
 
 namespace PantherParking.Data.DAL.Repositories
 {
@@ -43,7 +43,7 @@ namespace PantherParking.Data.DAL.Repositories
 
                 request.Method = httpMethod + "";
 
-                if (!headers.IsNullOrEmpty())
+                if (headers != null && headers.Count > 0)
                 {
                     foreach (KeyValuePair<string, string> kvp in headers)
                     {
@@ -78,7 +78,8 @@ namespace PantherParking.Data.DAL.Repositories
                 ex.Data["URL"] = url;
                 ex.Data["Content Type"] = httpContentType + "";
                 ex.Data["HTTP Method"] = httpMethod;
-                ex.Data["HTTP Headers"] = headers.ToString(seperator: "],[", isItemWrapped: true, iWrapItems: 1);
+                //ex.Data["HTTP Headers"] = headers.ToString(seperator: "],[", isItemWrapped: true, iWrapItems: 1);
+                throw;
             }
             finally
             {
