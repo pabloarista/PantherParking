@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{C50FB7DF-0AF4-4384-ADFC-F147BA984E0F}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PantherParking.Data</RootNamespace>
     <AssemblyName>PantherParking.Data</AssemblyName>
@@ -29,6 +29,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>PantherParking.Data.DAL.Repositories.BaseRepository</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Pqsk.Helper">
       <HintPath>..\..\Assets\pqsk\Pqsk.Helper.dll</HintPath>
@@ -39,6 +42,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -61,7 +65,6 @@
     <Compile Include="DAL\Repositories\LoginRepository.cs" />
     <Compile Include="Models\Attributes\SerializeModelAttribute.cs" />
     <Compile Include="Models\Attributes\SerializePropertyAttribute.cs" />
-    <Compile Include="Models\enumerations\HttpContentType.cs" />
     <Compile Include="Models\enumerations\HttpMethod.cs" />
     <Compile Include="Models\ModelToDictionary.cs" />
     <Compile Include="Models\User.cs" />
