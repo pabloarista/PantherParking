@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PantherParking.Web;
 using PantherParking.Web.Controllers;
+using NUnit.Framework;
 
 namespace PantherParking.Web.Tests.Controllers
 {
