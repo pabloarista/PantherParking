@@ -2,7 +2,7 @@
 {
     public interface ILocationRepository
     {
-        bool CheckIn(string username, int lot);
-        bool CheckOut(string username);
+        LocationResponse CheckIn(CheckIn data);
+        LocationResponse CheckOut(CheckIn data);
     }
 }

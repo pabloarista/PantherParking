@@ -10,14 +10,10 @@ namespace PantherParking.Services.Registration
         {
             this.registrationRepository = registrationRepository;
         }
-        public bool CheckDuplicateRegistration(string email, string username)
-        {
-            return this.registrationRepository.CheckDuplicateRegistration(email, username);
-        }
 
-        public bool Register(string email, string username, string password, string passwordConfirm)
+        public RegistrationResponse Register(User userData)
         {
-            return this.registrationRepository.Register(email, username, password, passwordConfirm);
+            return this.registrationRepository.Register(userData);
         }
     }
 }

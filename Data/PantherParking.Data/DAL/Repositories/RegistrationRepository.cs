@@ -6,7 +6,7 @@ namespace PantherParking.Data.DAL.Repositories
 {
     public class RegistrationRepository : BaseRepository, IRegistrationRepository
     {
-        public bool CheckDuplicateRegistration(string email)
+        private bool CheckDuplicateRegistration(string email)
         {
             try{
                 var duplicated = await ParseUser.Query
@@ -20,7 +20,7 @@ namespace PantherParking.Data.DAL.Repositories
             }
         }
 
-        public RegistrationResponse Register(string email, string username, string password, string passwordConfirm)
+        public RegistrationResponse Register(User userData)
         {
            try{
                RegistrationResponse response = new RegistrationResponse();
@@ -39,7 +39,7 @@ namespace PantherParking.Data.DAL.Repositories
                 user["Token"] = null;
                 user["tempPassword"] = passwordConfirm;
                             
-                response = validateUserRegistration();
+                response = validateUserRegistration(user);
                 
                 if(response.ResponseValue)
                 {
@@ -57,7 +57,7 @@ namespace PantherParking.Data.DAL.Repositories
            }
         }
         
-        public RegistrationResponse validateUserRegistration (ParseUser user)
+        private RegistrationResponse validateUserRegistration (ParseUser user)
         {
             try{
                 RegistrationResponse response = new RegistrationResponse();

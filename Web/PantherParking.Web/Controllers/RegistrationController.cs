@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using PantherParking.Services.Registration;
+using PantherParking.Data.Models;
 
 namespace PantherParking.Web.Controllers
 {
@@ -12,12 +13,13 @@ namespace PantherParking.Web.Controllers
     {
         public IRegistrationService RegistrationService { get; set; }
 
-
-        [Route("api/Registration/Test/")]
-        public HttpResponseMessage PostRegister()
+        //This is the registration End Point 
+        [Route("api/Registration/register")]
+        public HttpResponseMessage PostRegister(User userData)
         {
-            bool b = this.RegistrationService.Register("", "", "","");
-            return this.Request.CreateResponse(HttpStatusCode.OK, "Test");
+            RegistrationResponse  response = this.RegistrationService.Register(userData);
+            return this.Request.CreateResponse(HttpStatusCode.OK, response);
         }
+        
     }
 }

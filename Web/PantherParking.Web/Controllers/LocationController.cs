@@ -4,10 +4,30 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using PantherParking.Services.Login;
+using PantherParking.Data.Models;
 
 namespace PantherParking.Web.Controllers
 {
     public class LocationController : ApiController
     {
+        public ILocationService LocationService { get; set; }
+
+        //This is the checkin End Point 
+        [Route("api/Location/checkIn")]
+        public HttpResponseMessage PostLogin([FromBody] CheckIn data)
+        {
+            LocationResponse response = this.LocationService.CheckIn(data);
+            return this.Request.CreateResponse(HttpStatusCode.OK, response);
+        }
+        
+        //This is the checkin End Point 
+        [Route("api/Location/checkOut")]
+        public HttpResponseMessage PostLogin([FromBody] CheckIn data)
+        {
+            LocationResponse response = this.LocationService.CheckOut(data);
+            return this.Request.CreateResponse(HttpStatusCode.OK, response);
+        }
+        
     }
 }

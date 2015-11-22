@@ -11,22 +11,22 @@ namespace PantherParking.Services.HistoricalData
             this.historicalDataRepository = historicalDataRepository;
         }
 
-        public int[] GetLastFiveWeeks()
+        public HistoricalDataResponse[] GetLastFiveWeeks()
         {
             return this.historicalDataRepository.GetLastFiveWeeks();
         }
 
-        public int[] GetWeeklyHistory(int weekID)
+        public HistoricalDataResponse[] GetWeeklyHistory(int weekID)
         {
             return this.historicalDataRepository.GetWeeklyHistory(weekID);
         }
 
-        public string GetColor(int lot)
+        public HistoricalDataResponse GetColor(int lot)
         {
             return this.GetColor(lot);
         }
 
-        public int GetSpacesAvailable(int lot)
+        public HistoricalDataResponse GetSpacesAvailable(int lot)
         {
             return this.historicalDataRepository.GetSpacesAvailable(lot);
         }
