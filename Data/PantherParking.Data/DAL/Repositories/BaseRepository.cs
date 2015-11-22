@@ -10,18 +10,21 @@ using System.Security.Cryptography.X509Certificates;
 using System.Xml.Linq;
 using PantherParking.Data.Models.enumerations;
 using System.Web.Script.Serialization;
-//using Pqsk.Helper;
-//using Pqsk.Helper.Xml;
+using Newtonsoft.Json;
 
 namespace PantherParking.Data.DAL.Repositories
 {
+    public class JsonTest
+    {
+        
+    }
     public class BaseRepository
     {
         public static void Main()
         {
             BaseRepository br = new BaseRepository();
-            dynamic response = br.GetRestApiResponse(BaseRepository.ParseUrlPrefix + "classes/TestObject", HttpMethod.Post, null,
-                new {foo = "bar"});
+            dynamic response = br.GetRestApiResponse<object>(BaseRepository.ParseUrlPrefix + "classes/JsonTest", HttpMethod.Post,
+                new {foo = "bar"}, null, false);
         }
 
 #warning TODO: here we need the call to our datastore that shall be inherited by all repository classes
@@ -53,18 +56,25 @@ namespace PantherParking.Data.DAL.Repositories
                 : value.ToString();
         }
 
+        public static T DeserializeJsonToModel<T>(string json)
+        {
+            T o = JsonConvert.DeserializeObject<T>(json);
+
+            return o;
+        }
         public static string SerializeModeltoJson(object o)
         {
-            string json = new JavaScriptSerializer().Serialize(o);
+            string json = JsonConvert.SerializeObject(o);
 
             return json;
         }
 
-#warning TODO:check if we need any headers besides the application id and the rest api key, because we don't need to use the whole parse API
-        public dynamic GetRestApiResponse(string url
+        public dynamic GetRestApiResponse<TResponseResult>(string url
                                 , HttpMethod httpMethod
-                                , Dictionary<string, string> headers
-                                , object contents)
+                                , object contents
+                                , string token
+                                , bool session)
+            where TResponseResult : class
         {
             HttpWebRequest request = null;
             HttpWebResponse response = null;
@@ -77,38 +87,51 @@ namespace PantherParking.Data.DAL.Repositories
                 request = (HttpWebRequest)WebRequest.Create(url);
 
                 request.Method = BaseRepository.GetEnumDescription(httpMethod);
-
-                if (headers != null && headers.Count > 0)
-                {
-                    foreach (KeyValuePair<string, string> kvp in headers)
-                    {
-                        request.Headers.Add(kvp.Key, kvp.Value);
-                    }//foreach kvp
-                }//if
+                
 
                 #region headers
                 request.Headers.Add("X-Parse-Application-Id", BaseRepository.AppID);
                 request.Headers.Add("X-Parse-REST-API-Key", BaseRepository.RestApiKey);
+                if (!string.IsNullOrWhiteSpace(token))
+                {
+                    //sample token:
+                    //r:pnktnjyb996sj4p156gjtp4im
+                    request.Headers.Add("X-Parse-Session-Token", token);
+                }//if
+                if (session)
+                {
+                    request.Headers.Add("X-Parse-Revocable-Session", "1");
+                }//if
+
+                //for the roles api:
+                //"X-Parse-Master-Key: gbddxekqnucHKN2EnFlKpYmFc1xvYrphlRT03siW"
                 #endregion headers
 
-                request.ContentType = BaseRepository.DefaultParseHttpContentType;
-
-                using (StreamWriter writer = new StreamWriter(request.GetRequestStream()))
+                if (contents != null)
                 {
+                    request.ContentType = BaseRepository.DefaultParseHttpContentType;
 
-                    writer.WriteLine(BaseRepository.SerializeModeltoJson(contents));
-                    writer.Flush();
-                    writer.Close();
-                }//using writer
+                    using (StreamWriter writer = new StreamWriter(request.GetRequestStream()))
+                    {
+
+                        writer.WriteLine(BaseRepository.SerializeModeltoJson(contents));
+                        writer.Flush();
+                        writer.Close();
+                    }//using writer
+                }
                 // Send the data to the webserver
                 response = (HttpWebResponse)request.GetResponse();
                 string parseResponse = null;
-                using (var streamReader = new StreamReader(response.GetResponseStream()))
+                Stream s = response.GetResponseStream();
+                if (s != null)
                 {
-                    parseResponse = streamReader.ReadToEnd();
-                }
-
-                return parseResponse;
+                    using (var streamReader = new StreamReader(s))
+                    {
+                        parseResponse = streamReader.ReadToEnd();
+                    }
+                }//if
+                //TResponseResult noResponseResult = null;
+                return parseResponse == null ? null : BaseRepository.DeserializeJsonToModel<TResponseResult>(parseResponse);
 
             }
             catch (Exception ex)

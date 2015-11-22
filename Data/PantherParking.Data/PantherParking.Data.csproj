@@ -33,8 +33,9 @@
     <StartupObject>PantherParking.Data.DAL.Repositories.BaseRepository</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Pqsk.Helper">
-      <HintPath>..\..\Assets\pqsk\Pqsk.Helper.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="StructureMap">
       <HintPath>..\..\Assets\StructureMap\2.6.1\StructureMap.dll</HintPath>
@@ -67,11 +68,15 @@
     <Compile Include="Models\Attributes\SerializePropertyAttribute.cs" />
     <Compile Include="Models\enumerations\HttpMethod.cs" />
     <Compile Include="Models\ModelToDictionary.cs" />
+    <Compile Include="Models\Parse\ObjectCreatedResponse.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
