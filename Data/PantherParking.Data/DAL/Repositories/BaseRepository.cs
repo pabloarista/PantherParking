@@ -69,7 +69,7 @@ namespace PantherParking.Data.DAL.Repositories
             return json;
         }
 
-        public dynamic GetRestApiResponse<TResponseResult>(string url
+        public TResponseResult GetRestApiResponse<TResponseResult>(string url
                                 , HttpMethod httpMethod
                                 , object contents
                                 , string token
@@ -148,8 +148,6 @@ namespace PantherParking.Data.DAL.Repositories
                 Stream responseStream = response?.GetResponseStream();
                 responseStream?.Close();
             }
-#warning TODO:should we respond with the HTTP status code and set an object by reference? or a new model that will have the http status code?
-            return response?.StatusCode ?? HttpStatusCode.InternalServerError;
         }
     }
 }

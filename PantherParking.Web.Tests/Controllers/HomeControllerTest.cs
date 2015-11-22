@@ -20,6 +20,7 @@ namespace PantherParking.Web.Tests.Controllers
             //// Assert
             //Assert.IsNotNull(result);
             //Assert.AreEqual("Home Page", result.ViewBag.Title);
+            //Assert.IsNull(null);
         }
     }
 }

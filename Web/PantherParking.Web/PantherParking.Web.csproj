@@ -205,6 +205,16 @@
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\PantherParking.Data\PantherParking.Data.csproj">
+      <Project>{c50fb7df-0af4-4384-adfc-f147ba984e0f}</Project>
+      <Name>PantherParking.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Data\PantherParking.Services\PantherParking.Services.csproj">
+      <Project>{622a34ea-e965-4616-9170-ac21e5eca2bb}</Project>
+      <Name>PantherParking.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
