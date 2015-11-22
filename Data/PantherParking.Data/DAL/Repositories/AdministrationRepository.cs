@@ -9,7 +9,8 @@ namespace PantherParking.Data.DAL.Repositories
 {
     public class AdministrationRepository : BaseRepository, IAdministrationRepository
     {
-        public async Task<bool> SetStartDate(DateTime begin)
+        
+        private async Task<bool> SetStartDate2(DateTime begin)
         {
             int year = begin.Year;
             AcademicCalendarSeason season;
@@ -34,8 +35,6 @@ namespace PantherParking.Data.DAL.Repositories
             calendar.Build();
 
             await calendar.SaveAsync();
-
-            return new Task<bool>(() => true);
         }
 
         public bool SetEndDate(DateTime end)
