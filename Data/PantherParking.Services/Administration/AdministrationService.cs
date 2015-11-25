@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using PantherParking.Data.DAL.Interfaces;
 
 namespace PantherParking.Services.Administration
@@ -12,19 +13,17 @@ namespace PantherParking.Services.Administration
             this.administrationRepository = administrationRepository;
         }
 
-        public bool SetStartDate(DateTime begin)
+        public bool SetAcademicCalendar(DateTime begin, DateTime end)
         {
-            return this.administrationRepository.SetStartDate(begin);
-        }
+            Task<bool> result = this.administrationRepository.SetAcademicCalendar(begin, end);
 
-        public bool SetEndDate(DateTime end)
-        {
-            return this.administrationRepository.SetEndDate(end);
+            return result.Result;
         }
 
         public bool SetHoliday(DateTime holiday)
         {
-            return this.administrationRepository.SetHoliday(holiday);
+            Task<bool> result = this.administrationRepository.SetHoliday(holiday);
+            return result.Result;
         }
     }
 }

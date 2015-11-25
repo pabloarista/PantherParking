@@ -38,7 +38,7 @@ namespace PantherParking.Data.DAL.Repositories
             
             AcademicCalendar calendar = BaseParseObject.CreateMe<AcademicCalendar>();
             calendar.beginDateTime = begin;
-            calendar.Season = season;
+            calendar.season = season;
             calendar.year = year;
 
             calendar.Build();
