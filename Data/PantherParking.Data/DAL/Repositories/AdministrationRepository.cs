@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using PantherParking.Data.DAL.Interfaces;
 using PantherParking.Data.Models;
@@ -9,15 +10,15 @@ namespace PantherParking.Data.DAL.Repositories
 {
     public class AdministrationRepository : BaseRepository, IAdministrationRepository
     {
-        public async Task<bool> SetStartDate(DateTime begin)
+        private AcademicCalendarSeason GetSeason(int month)
         {
-            int year = begin.Year;
             AcademicCalendarSeason season;
-            if (begin.Month >= 8)
+
+            if (month >= 8)
             {
                 season = AcademicCalendarSeason.Fall;
             }//if
-            else if (begin.Month >= 5)
+            else if (month >= 5)
             {
                 season = AcademicCalendarSeason.Summer;
             }//else if
@@ -25,26 +26,46 @@ namespace PantherParking.Data.DAL.Repositories
             {
                 season = AcademicCalendarSeason.Spring;
             }//else
+
+            return season;
+        }
+
+        public async Task<bool> SetAcademicCalendar(DateTime begin, DateTime end)
+        {
+            int year = begin.Year;
+            AcademicCalendarSeason season = this.GetSeason(begin.Month);
+            
             
             AcademicCalendar calendar = BaseParseObject.CreateMe<AcademicCalendar>();
             calendar.beginDateTime = begin;
-            calendar.Season = season;
+            calendar.season = season;
             calendar.year = year;
 
             calendar.Build();
 
-            await calendar.SaveAsync();
+            Task saveTask = calendar.SaveAsync();
 
-            return new Task<bool>(() => true);
+            switch (saveTask.Status)
+            {
+                case TaskStatus.Created:
+                    return await Task.FromResult(true);
+                case TaskStatus.WaitingForActivation:
+                case TaskStatus.WaitingToRun:
+                case TaskStatus.Running:
+                case TaskStatus.WaitingForChildrenToComplete:
+                case TaskStatus.RanToCompletion:
+                case TaskStatus.Canceled:
+                case TaskStatus.Faulted:
+                default:
+                    return await Task.FromResult(false);
+            }//switch
         }
 
-        public bool SetEndDate(DateTime end)
+        public async Task<bool> SetHoliday(DateTime holiday)
         {
-            throw new NotImplementedException();
-        }
+            AcademicCalendarSeason season = this.GetSeason(holiday.Month);
+            int year = holiday.Year;
 
-        public bool SetHoliday(DateTime holiday)
-        {
             throw new NotImplementedException();
         }
     }

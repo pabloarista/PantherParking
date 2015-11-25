@@ -1,11 +1,11 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace PantherParking.Data.DAL.Interfaces
 {
     public interface IAdministrationRepository
     {
-        bool SetStartDate(DateTime begin);
-        bool SetEndDate(DateTime end);
-        bool SetHoliday(DateTime holiday);
+        Task<bool> SetAcademicCalendar(DateTime begin, DateTime end);
+        Task<bool> SetHoliday(DateTime holiday);
     }
 }

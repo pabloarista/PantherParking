@@ -13,7 +13,7 @@ namespace PantherParking.Data.Models.Administration
         //[JsonProperty("endDateTime")]
         public DateTime endDateTime { get; set; }
         //[JsonProperty("season")]
-        public AcademicCalendarSeason Season { get; set; }
+        public AcademicCalendarSeason season { get; set; }
         //[JsonProperty("year")]
         public int year { get; set; }
     }
