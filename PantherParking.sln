@@ -45,6 +45,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PantherParking.Web", "Web\P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PantherParking.Web.Tests", "PantherParking.Web.Tests\PantherParking.Web.Tests.csproj", "{E85628BF-27C8-42BF-B3D6-99641F4AA419}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{90846059-4512-4B50-A5A8-57B8575A0EC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PantherParking.Data.UnitTests", "UnitTests\PantherParking.Data.UnitTests\PantherParking.Data.UnitTests.csproj", "{26509E0E-0879-4FBB-BB0E-97D932B13F0E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +71,10 @@ Global
 		{E85628BF-27C8-42BF-B3D6-99641F4AA419}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E85628BF-27C8-42BF-B3D6-99641F4AA419}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E85628BF-27C8-42BF-B3D6-99641F4AA419}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26509E0E-0879-4FBB-BB0E-97D932B13F0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26509E0E-0879-4FBB-BB0E-97D932B13F0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26509E0E-0879-4FBB-BB0E-97D932B13F0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26509E0E-0879-4FBB-BB0E-97D932B13F0E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,5 +87,6 @@ Global
 		{36935BDE-8337-4D92-AE75-8662FB52CEED} = {7016A864-029A-43D2-BC55-0E847692195B}
 		{3E23A557-C893-492B-B712-2778FCF04AF4} = {FD8872C6-E492-411D-B5BA-89E624DFBAE0}
 		{E85628BF-27C8-42BF-B3D6-99641F4AA419} = {FD8872C6-E492-411D-B5BA-89E624DFBAE0}
+		{26509E0E-0879-4FBB-BB0E-97D932B13F0E} = {90846059-4512-4B50-A5A8-57B8575A0EC9}
 	EndGlobalSection
 EndGlobal

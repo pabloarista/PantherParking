@@ -5,8 +5,6 @@ namespace PantherParking.Data.Models
 {
     public class User : BaseModel
     {
-        [JsonProperty("objectId")]
-        public string ID { get; set; }
         public string username { get; set; }
         //public string FirstName { get; set; }
         //public string LastName { get; set; }
@@ -18,5 +16,7 @@ namespace PantherParking.Data.Models
         public int numberOfFailedLogins { get; set; }
         public string token { get; set; }
         public string garageID { get; set; }
+        public bool emailVerified { get; set; }
+        public DateTime createdAt { get; set; }
     }
 }

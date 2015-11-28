@@ -77,6 +77,7 @@
     <Compile Include="Models\Attributes\SerializeModelAttribute.cs" />
     <Compile Include="Models\Attributes\SerializePropertyAttribute.cs" />
     <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\CheckIn.cs" />
     <Compile Include="Models\ClassCalendar.cs" />
     <Compile Include="Models\ClassGarage.cs" />
     <Compile Include="Models\ClassHistory.cs" />
@@ -86,6 +87,9 @@
     <Compile Include="Models\ModelToDictionary.cs" />
     <Compile Include="Models\Parse\ObjectCreatedResponse.cs" />
     <Compile Include="Models\Parse\ObjectUpdatedResponse.cs" />
+    <Compile Include="Models\ResponseModels\HistoricalDataResponse.cs" />
+    <Compile Include="Models\ResponseModels\LocationResponse.cs" />
+    <Compile Include="Models\ResponseModels\LoginResponse.cs" />
     <Compile Include="Models\ResponseModels\RegistrationResponse.cs" />
     <Compile Include="Models\ResponseModels\ResponseParse.cs" />
     <Compile Include="Models\User.cs" />

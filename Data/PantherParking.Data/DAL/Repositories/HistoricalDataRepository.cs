@@ -1,4 +1,5 @@
 ﻿using PantherParking.Data.DAL.Interfaces;
+using PantherParking.Data.Models.ResponseModels;
 
 namespace PantherParking.Data.DAL.Repositories
 {

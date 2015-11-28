@@ -11,49 +11,55 @@ namespace PantherParking.Data.DAL.Repositories
     {
         public LocationResponse CheckIn(CheckIn data)
         {
-            //Pablo this was here before, I dodnt want to delete it in case you actually put it on purpose
-            throw new System.NotImplementedException();
+            ResponseParse<User> r = base.GetObject<User>(data.Token, new Dictionary<string, string>(1) { { "userName", data.Username } });
+
+            if (r == null || r.HttpStatusCode != HttpStatusCode.OK || r.ResponseBody == null)
+            {
+                return new LocationResponse
+                {
+                    ResponseValue = false,
+                    ResponseMessage = "User was not found! Unable to check in."
+                };
+            }//if
+
+            User u = r.ResponseBody;
+            u.garageID = data.GarageId;
+
+            ResponseParse<ObjectUpdatedResponse> updateResponse = base.UpdateObject(u, data.Token);
+
+            LocationResponse lr = new LocationResponse
+            {
+                ResponseValue = updateResponse?.ResponseBody != null,
+                ResponseMessage = ""
+            };
+            return lr;
         }
 
         public LocationResponse CheckOut(CheckIn data)
         {
-            //Pablo this was here before, I dodnt want to delete it in case you actually put it on purpose
-            throw new System.NotImplementedException();
-        }
-
-        public bool CheckIn(string username, string garageID, string token)
-        {
-            ResponseParse<User> r = base.GetObject<User>(token, new Dictionary<string, string>(1) { { "userName", username } });
+            ResponseParse<User> r = base.GetObject<User>(data.Token, new Dictionary<string, string>(1) { { "userName", data.Username } });
 
             if (r == null || r.HttpStatusCode != HttpStatusCode.OK || r.ResponseBody == null)
             {
-                return false;
-            }//if
-
-            User u = r.ResponseBody;
-            u.garageID = garageID;
-
-            ResponseParse<ObjectUpdatedResponse> updateResponse = base.UpdateObject(u, token);
-
-            return updateResponse?.ResponseBody != null;
-        }
-
-        public bool CheckOut(string username, string token)
-        {
-            ResponseParse<User> r = base.GetObject<User>(token, new Dictionary<string, string>(1) { { "userName", username } });
-
-            if (r == null || r.HttpStatusCode != HttpStatusCode.OK || r.ResponseBody == null)
-            {
-                return false;
+                return new LocationResponse
+                {
+                    ResponseValue = false,
+                    ResponseMessage = "User was not found! Unable to check in."
+                };
             }//if
 
             User u = r.ResponseBody;
             u.garageID = null;
 
-            ResponseParse<ObjectUpdatedResponse> updateResponse = base.UpdateObject(u, token);
+            ResponseParse<ObjectUpdatedResponse> updateResponse = base.UpdateObject(u, data.Token);
 
-            return updateResponse?.ResponseBody != null;
+            LocationResponse lr = new LocationResponse
+            {
+                ResponseValue = updateResponse?.ResponseBody != null,
+                ResponseMessage = "",
+            };
 
+            return lr;
 
         }
     }

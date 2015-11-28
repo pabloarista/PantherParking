@@ -41,8 +41,8 @@ namespace PantherParking.Data.DAL.Repositories
                 season = season,
                 year = year
             };
-            
 
+            return false;
         }
 
         public bool SetHoliday(DateTime holiday)

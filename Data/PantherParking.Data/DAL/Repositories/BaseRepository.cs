@@ -67,7 +67,7 @@ namespace PantherParking.Data.DAL.Repositories
         public ResponseParse<TResponseResult> ChangeObject<TResponseResult>(IBaseModel model, string token, HttpMethod httpMethod)
             where TResponseResult : IBaseModel
         {
-            string url = $"{BaseRepository.ParseUrlPrefix}classes/{model.GetType()}/{model.ObjectId}";
+            string url = $"{BaseRepository.ParseUrlPrefix}classes/{model.GetType()}/{model.objectId}";
 
             ResponseParse<TResponseResult> r = this.GetRestApiResponse<TResponseResult>(url, httpMethod, model, token);
 

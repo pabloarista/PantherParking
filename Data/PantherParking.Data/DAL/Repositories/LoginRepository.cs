@@ -1,5 +1,7 @@
-﻿using PantherParking.Data.DAL.Interfaces;
+﻿using System;
+using PantherParking.Data.DAL.Interfaces;
 using PantherParking.Data.Models;
+using PantherParking.Data.Models.ResponseModels;
 
 namespace PantherParking.Data.DAL.Repositories
 {
@@ -14,13 +16,13 @@ namespace PantherParking.Data.DAL.Repositories
         public LoginResponse Logout(User userData)
         {
 #warning logout user from data store
-            return false;
+            throw new NotImplementedException();
         }
 
         public bool ValidateSession(string token)
         {
 #warning ensure token corresponds to this user
-            return false;
+            throw new NotImplementedException();
         }
     }
 }

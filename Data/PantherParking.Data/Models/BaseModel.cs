@@ -11,8 +11,7 @@ namespace PantherParking.Data.Models
 {
     public class BaseModel : IBaseModel
     {
-        [JsonProperty("objectId")]
-        public string ObjectId { get; set; }
+        public string objectId { get; set; }
 
         public string ToJson()
         {
@@ -30,7 +29,7 @@ namespace PantherParking.Data.Models
 
         public static TModel GetModel<TModel>(string json) where TModel : IBaseModel
         {
-            IBaseModel o = JsonConvert.DeserializeObject<TModel>(json);
+            TModel o = JsonConvert.DeserializeObject<TModel>(json);
 
             return o;
         }
