@@ -1,6 +1,10 @@
-﻿using PantherParking.Data.DAL.Interfaces;
+﻿using System;
+using System.Collections.Generic;
+using System.Net;
+using PantherParking.Data.DAL.Interfaces;
 using PantherParking.Data.Models;
 using PantherParking.Data.Models.ResponseModels;
+using Parse;
 
 namespace PantherParking.Data.DAL.Repositories
 {
@@ -8,40 +12,41 @@ namespace PantherParking.Data.DAL.Repositories
     {
         private bool CheckDuplicateRegistration(string email)
         {
-            try{
-                var duplicated = await ParseUser.Query
-                            .WhereEqualTo("Email", email)
-                            .FindAsync();
-                return duplicated;
+            try
+            {
+                ResponseParse<User> r = base.GetObject<User>(null, new Dictionary<string, string>(1) { { "email", email } });
+
+                return r != null && r.HttpStatusCode == HttpStatusCode.OK && r.ResponseBody != null;
             }
             catch (Exception e)
             {
-                return e;
+                return false;
             }
         }
 
         public RegistrationResponse Register(User userData)
         {
-           try{
-               RegistrationResponse response = new RegistrationResponse();
+            try
+            {
+                RegistrationResponse response = new RegistrationResponse();
                 var user = new ParseUser()
                 {
                     Username = username,
                     Password = password,
-                    Email = email, 
+                    Email = email,
                 };
                 // Adding other fields
                 user["AdminUser"] = false;
                 user["Locked"] = false;
                 user["LastLoginDateTime"] = new DateTime();
-                user["LastFailedLoginDateTime"] = null;        
+                user["LastFailedLoginDateTime"] = null;
                 user["NumberOfFailedLogins"] = 0;
                 user["Token"] = null;
                 user["tempPassword"] = passwordConfirm;
-                            
+
                 response = validateUserRegistration(user);
-                
-                if(response.ResponseValue)
+
+                if (response.ResponseValue)
                 {
                     await user.SignUpAsync();
                     return response;
@@ -50,39 +55,41 @@ namespace PantherParking.Data.DAL.Repositories
                 {
                     return response;
                 }
-           }
-           catch (Exception e)
-           {
+            }
+            catch (Exception e)
+            {
                 throw;
-           }
+            }
         }
-        
-        private RegistrationResponse validateUserRegistration (ParseUser user)
+
+        private RegistrationResponse validateUserRegistration(ParseUser user)
         {
-            try{
+            try
+            {
                 RegistrationResponse response = new RegistrationResponse();
-                bool isNewUser = CheckDuplicateRegistration(user.email); 
+                bool isNewUser = CheckDuplicateRegistration(user.email);
                 bool passwordIsMatched = user.Password.Equals(user.tempPassword);
                 user.tempPassword = null;
-                if(isNewUser == passwordIsMatched){
+                if (isNewUser == passwordIsMatched)
+                {
                     response.ResponseValue = true;
                     response.ResponseMessage = "SUCESS: User has been validated";
                 }
                 else
                 {
                     response.ResponseValue = true;
-                    if(!isNewUser)
+                    if (!isNewUser)
                         response.ResponseMessage = "ERROR: User has been taken";
                     else
                         response.ResponseMessage = "ERROR: Passwords don't match";
                 }
-                    
+
                 return response;
             }
             catch (Exception e)
             {
-                    throw;
+                throw;
             }
-        }  
+        }
     }
 }
