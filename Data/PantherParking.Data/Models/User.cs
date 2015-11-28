@@ -15,6 +15,7 @@ namespace PantherParking.Data.Models
         public DateTime lastFailedLoginDateTime { get; set; }
         public int numberOfFailedLogins { get; set; }
         public string token { get; set; }
+        public DateTime tokenExpirationDateTime { get; set; }
         public string garageID { get; set; }
         public bool emailVerified { get; set; }
         public DateTime createdAt { get; set; }

@@ -5,5 +5,7 @@
         string objectId { get; set; }
         string ToJson();
         IBaseModel ToModel(string json);
+
+
     }
 }

@@ -1,4 +1,6 @@
 ﻿using PantherParking.Data.DAL.Interfaces;
+using PantherParking.Data.Models;
+using PantherParking.Data.Models.ResponseModels;
 
 namespace PantherParking.Services.Location
 {
@@ -12,12 +14,12 @@ namespace PantherParking.Services.Location
         }
         public LocationResponse CheckIn(CheckIn data)
         {
-            return this.locationRepository.CheckIn(username, lot);
+            return this.locationRepository.CheckIn(data);
         }
 
         public LocationResponse CheckOut(CheckIn data)
         {
-            return this.locationRepository.CheckOut(username);
+            return this.locationRepository.CheckOut(data);
         }
     }
 }

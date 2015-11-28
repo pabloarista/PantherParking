@@ -45,9 +45,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PantherParking.Web", "Web\P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PantherParking.Web.Tests", "PantherParking.Web.Tests\PantherParking.Web.Tests.csproj", "{E85628BF-27C8-42BF-B3D6-99641F4AA419}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{90846059-4512-4B50-A5A8-57B8575A0EC9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{90846059-4512-4B50-A5A8-57B8575A0EC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PantherParking.Data.UnitTests", "UnitTests\PantherParking.Data.UnitTests\PantherParking.Data.UnitTests.csproj", "{26509E0E-0879-4FBB-BB0E-97D932B13F0E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PantherParking.Data.Tests", "Tests\PantherParking.Data.Tests\PantherParking.Data.Tests.csproj", "{26509E0E-0879-4FBB-BB0E-97D932B13F0E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

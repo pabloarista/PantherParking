@@ -13,12 +13,18 @@ namespace PantherParking.Data.DAL.Repositories
         {
             ResponseParse<User> r = base.GetObject<User>(data.Token, new Dictionary<string, string>(1) { { "userName", data.Username } });
 
-            if (r == null || r.HttpStatusCode != HttpStatusCode.OK || r.ResponseBody == null)
+            if (r == null
+                || r.HttpStatusCode != HttpStatusCode.OK
+                || r.ResponseBody == null
+                || !string.IsNullOrWhiteSpace(r.ResponseBody.garageID))
             {
                 return new LocationResponse
                 {
                     ResponseValue = false,
-                    ResponseMessage = "User was not found! Unable to check in."
+                    ResponseMessage =
+                        r == null
+                        ? "User was not found! Unable to check in."
+                        : "User is already checked in! Unable to check in until the user checks out of the previous parking garage!"
                 };
             }//if
 
@@ -39,12 +45,18 @@ namespace PantherParking.Data.DAL.Repositories
         {
             ResponseParse<User> r = base.GetObject<User>(data.Token, new Dictionary<string, string>(1) { { "userName", data.Username } });
 
-            if (r == null || r.HttpStatusCode != HttpStatusCode.OK || r.ResponseBody == null)
+            if (r == null
+                || r.HttpStatusCode != HttpStatusCode.OK
+                || r.ResponseBody == null
+                || !string.IsNullOrWhiteSpace(r.ResponseBody.garageID))
             {
                 return new LocationResponse
                 {
                     ResponseValue = false,
-                    ResponseMessage = "User was not found! Unable to check in."
+                    ResponseMessage =
+                        r == null
+                        ? "User was not found! Unable to check out."
+                        : "User is not checked in! Unable to check out!"
                 };
             }//if
 
