@@ -1,8 +1,13 @@
-﻿namespace PantherParking.Data.DAL.Interfaces
+﻿using System.Threading.Tasks;
+using PantherParking.Data.Models;
+using PantherParking.Data.Models.ResponseModels;
+using Parse;
+
+namespace PantherParking.Data.DAL.Interfaces
 {
     public interface IRegistrationRepository
     {
         bool CheckDuplicateRegistration(string email, string username);
-        bool Register(string email, string username, string password, string passwordConfirm);
+        RegistrationResponse Register(User user);
     }
 }

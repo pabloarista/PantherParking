@@ -15,15 +15,12 @@ namespace PantherParking.Services.Administration
 
         public bool SetAcademicCalendar(DateTime begin, DateTime end)
         {
-            Task<bool> result = this.administrationRepository.SetAcademicCalendar(begin, end);
-
-            return result.Result;
+            return this.administrationRepository.SetAcademicCalendar(begin, end);
         }
 
         public bool SetHoliday(DateTime holiday)
         {
-            Task<bool> result = this.administrationRepository.SetHoliday(holiday);
-            return result.Result;
+            return this.administrationRepository.SetHoliday(holiday);
         }
     }
 }

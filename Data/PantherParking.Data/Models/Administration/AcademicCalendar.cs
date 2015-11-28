@@ -4,7 +4,7 @@ using PantherParking.Data.Models.enumerations;
 
 namespace PantherParking.Data.Models.Administration
 {
-    public class AcademicCalendar : BaseParseObject
+    public class AcademicCalendar : BaseModel
     {
         //[JsonProperty("objectID")]
         //public string ID { get; set; }

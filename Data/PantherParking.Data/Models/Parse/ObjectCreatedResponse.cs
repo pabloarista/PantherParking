@@ -2,11 +2,9 @@
 
 namespace PantherParking.Data.Models.Parse
 {
-    public class ObjectCreatedResponse
+    public class ObjectCreatedResponse : BaseModel
     {
-        [JsonProperty("createdAt")]
-        public System.DateTime CreatedAt { get; set; }
-        [JsonProperty("objectId")]
-        public string ObjectId { get; set; }
+        public System.DateTime createdAt { get; set; }
+        public string objectId { get; set; }
     }
 }

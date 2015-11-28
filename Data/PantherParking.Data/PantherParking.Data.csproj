@@ -51,6 +51,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -75,11 +76,18 @@
     <Compile Include="Models\Administration\AcademicCalendar.cs" />
     <Compile Include="Models\Attributes\SerializeModelAttribute.cs" />
     <Compile Include="Models\Attributes\SerializePropertyAttribute.cs" />
-    <Compile Include="Models\BaseParseObject.cs" />
+    <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\ClassCalendar.cs" />
+    <Compile Include="Models\ClassGarage.cs" />
+    <Compile Include="Models\ClassHistory.cs" />
     <Compile Include="Models\enumerations\AcademicCalendarSeason.cs" />
     <Compile Include="Models\enumerations\HttpMethod.cs" />
+    <Compile Include="Models\IBaseModel.cs" />
     <Compile Include="Models\ModelToDictionary.cs" />
     <Compile Include="Models\Parse\ObjectCreatedResponse.cs" />
+    <Compile Include="Models\Parse\ObjectUpdatedResponse.cs" />
+    <Compile Include="Models\ResponseModels\RegistrationResponse.cs" />
+    <Compile Include="Models\ResponseModels\ResponseParse.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
