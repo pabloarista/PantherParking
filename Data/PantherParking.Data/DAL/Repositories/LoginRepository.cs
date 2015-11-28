@@ -5,13 +5,13 @@ namespace PantherParking.Data.DAL.Repositories
 {
     public class LoginRepository : BaseRepository, ILoginRepository
     {
-        public User Login(string username, string password)
+        public LoginResponse Login(User userData)
         {
 #warning login and return User model
             return null;
         }
 
-        public bool Logout(string username)
+        public LoginResponse Logout(User userData)
         {
 #warning logout user from data store
             return false;

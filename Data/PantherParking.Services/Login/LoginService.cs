@@ -12,12 +12,12 @@ namespace PantherParking.Services.Login
         }
 
 
-        public User Login(string username, string password)
+        public LoginResponse Login(User userData)
         {
             return this.loginRepository.Login(username, password);
         }
 
-        public bool Logout(string username)
+        public LoginResponse Logout(User userData)
         {
             return this.loginRepository.Logout(username);
         }

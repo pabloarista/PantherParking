@@ -10,14 +10,14 @@ namespace PantherParking.Services.Location
         {
             this.locationRepository = locationRepository;
         }
-        public bool CheckIn(string username, string garageID, string token)
+        public LocationResponse CheckIn(CheckIn data)
         {
-            return this.locationRepository.CheckIn(username, garageID, token);
+            return this.locationRepository.CheckIn(username, lot);
         }
 
-        public bool CheckOut(string username, string token)
+        public LocationResponse CheckOut(CheckIn data)
         {
-            return this.locationRepository.CheckOut(username, token);
+            return this.locationRepository.CheckOut(username);
         }
     }
 }

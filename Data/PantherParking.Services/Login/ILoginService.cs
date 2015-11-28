@@ -4,8 +4,8 @@ namespace PantherParking.Services.Login
 {
     public interface ILoginService
     {
-        User Login(string username, string password);
-        bool Logout(string username);
+        LoginResponse Login(User userData);
+        LoginResponse Logout(User userData);
         bool ValidateSession(string token);
     }
 }

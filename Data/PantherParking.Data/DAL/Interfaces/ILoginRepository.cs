@@ -5,8 +5,8 @@ namespace PantherParking.Data.DAL.Interfaces
 {
     public interface ILoginRepository
     {
-        User Login(string username, string password);
-        bool Logout(string username);
+        LoginResponse Login(User userData);
+        LoginResponse Logout(User userData);
         bool ValidateSession(string token);
     }
 }

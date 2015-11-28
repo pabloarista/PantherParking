@@ -4,22 +4,22 @@ namespace PantherParking.Data.DAL.Repositories
 {
     public class HistoricalDataRepository : BaseRepository, IHistoricalDataRepository
     {
-        public int[] GetLastFiveWeeks()
+        public HistoricalDataResponse GetLastFiveWeeks()
         {
             throw new System.NotImplementedException();
         }
 
-        public int[] GetWeeklyHistory(int weekID)
+        public HistoricalDataResponse GetWeeklyHistory(int weekID)
         {
             throw new System.NotImplementedException();
         }
 
-        public string GetColor(int lot)
+        public HistoricalDataResponse GetColor(int lot)
         {
             throw new System.NotImplementedException();
         }
 
-        public int GetSpacesAvailable(int lot)
+        public HistoricalDataResponse GetSpacesAvailable(int lot)
         {
             throw new System.NotImplementedException();
         }

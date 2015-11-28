@@ -2,9 +2,9 @@
 {
     public interface IHistoricalDataRepository
     {
-        int[] GetLastFiveWeeks();
-        int[] GetWeeklyHistory(int weekID);
-        string GetColor(int lot);
-        int GetSpacesAvailable(int lot);
+        HistoricalDataResponse GetLastFiveWeeks();
+        HistoricalDataResponse GetWeeklyHistory(int weekID);
+        HistoricalDataResponse GetColor(int lot);
+        HistoricalDataResponse GetSpacesAvailable(int lot);
     }
 }
