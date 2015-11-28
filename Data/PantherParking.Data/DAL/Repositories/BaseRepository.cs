@@ -31,14 +31,14 @@ namespace PantherParking.Data.DAL.Repositories
             //dynamic response = br.GetRestApiResponse<object>(BaseRepository.ParseUrlPrefix + "classes/JsonTest", HttpMethod.Post,
             //    new {foo = "bar"}, null, false);
         }
-        
+
 #warning TODO: here we need the call to our datastore that shall be inherited by all repository classes
 
-        private static string AppID => ConfigurationManager.AppSettings["appID"];
-        private static string RestApiKey => ConfigurationManager.AppSettings["restApiKey"];
-        private static string DefaultParseHttpContentType => ConfigurationManager.AppSettings["defaultParseHttpContentType"];
+        protected static string AppID => ConfigurationManager.AppSettings["appID"];
+        protected static string RestApiKey => ConfigurationManager.AppSettings["restApiKey"];
+        protected static string DefaultParseHttpContentType => ConfigurationManager.AppSettings["defaultParseHttpContentType"];
 
-        private static string ParseUrlPrefix => $"{ConfigurationManager.AppSettings["parseRestApi"]}/{ConfigurationManager.AppSettings["parseVersion"]}/";
+        protected static string ParseUrlPrefix => $"{ConfigurationManager.AppSettings["parseRestApi"]}/{ConfigurationManager.AppSettings["parseVersion"]}/";
 
         public static string GetEnumDescription(Enum value)
         {

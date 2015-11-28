@@ -87,7 +87,6 @@
     <Compile Include="Models\ModelToDictionary.cs" />
     <Compile Include="Models\Parse\ObjectCreatedResponse.cs" />
     <Compile Include="Models\Parse\ObjectUpdatedResponse.cs" />
-    <Compile Include="Models\RegistrationResponse.cs" />
     <Compile Include="Models\ResponseModels\HistoricalDataResponse.cs" />
     <Compile Include="Models\ResponseModels\LocationResponse.cs" />
     <Compile Include="Models\ResponseModels\LoginResponse.cs" />
