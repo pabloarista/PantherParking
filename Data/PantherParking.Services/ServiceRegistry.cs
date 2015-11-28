@@ -20,7 +20,7 @@ namespace PantherParking.Services
             For<IRegistrationService>().Use<RegistrationService>();
             For<IAdministrationService>().Use<AdministrationService>();
             For<ILocationService>().Use<LocationService>();
-            For<IHistoryicalDataService>().Use<HistoricalDataService>();
+            For<IHistoricalDataService>().Use<HistoricalDataService>();
         }
     }
 }

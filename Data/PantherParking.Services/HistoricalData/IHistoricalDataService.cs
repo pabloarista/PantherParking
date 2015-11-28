@@ -1,6 +1,8 @@
-﻿namespace PantherParking.Services.HistoricalData
+﻿using PantherParking.Data.Models.ResponseModels;
+
+namespace PantherParking.Services.HistoricalData
 {
-    public interface IHistoryicalDataService
+    public interface IHistoricalDataService
     {
         HistoricalDataResponse GetLastFiveWeeks();
         HistoricalDataResponse GetWeeklyHistory(int weekID);

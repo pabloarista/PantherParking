@@ -46,7 +46,7 @@
     <Compile Include="Administration\AdministrationService.cs" />
     <Compile Include="Administration\IAdministrationService.cs" />
     <Compile Include="HistoricalData\HistoricalDataService.cs" />
-    <Compile Include="HistoricalData\IHistoryicalDataService.cs" />
+    <Compile Include="HistoricalData\IHistoricalDataService.cs" />
     <Compile Include="Location\ILocationService.cs" />
     <Compile Include="Location\LocationService.cs" />
     <Compile Include="Login\ILoginService.cs" />

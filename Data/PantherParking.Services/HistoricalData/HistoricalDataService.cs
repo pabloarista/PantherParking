@@ -2,7 +2,7 @@
 
 namespace PantherParking.Services.HistoricalData
 {
-    public class HistoricalDataService : IHistoryicalDataService
+    public class HistoricalDataService : IHistoricalDataService
     {
         private readonly IHistoricalDataRepository historicalDataRepository;
 

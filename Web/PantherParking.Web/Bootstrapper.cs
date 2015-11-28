@@ -20,7 +20,7 @@ namespace PantherParking.Web
                 c.SetAllProperties(p =>
                 {
                     p.OfType<IAdministrationService>();
-                    p.OfType<IHistoryicalDataService>();
+                    p.OfType<IHistoricalDataService>();
                     p.OfType<ILocationService>();
                     p.OfType<ILoginService>();
                     p.OfType<IRegistrationService>();

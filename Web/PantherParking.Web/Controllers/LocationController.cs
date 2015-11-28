@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Web.Http;
 using PantherParking.Services.Login;
 using PantherParking.Data.Models;
+using PantherParking.Data.Models.ResponseModels;
+using PantherParking.Services.Location;
 
 namespace PantherParking.Web.Controllers
 {
@@ -15,7 +17,7 @@ namespace PantherParking.Web.Controllers
 
         //This is the checkin End Point 
         [Route("api/Location/checkIn")]
-        public HttpResponseMessage PostLogin([FromBody] CheckIn data)
+        public HttpResponseMessage PostCheckIn(CheckIn data)
         {
             LocationResponse response = this.LocationService.CheckIn(data);
             return this.Request.CreateResponse(HttpStatusCode.OK, response);
@@ -23,7 +25,7 @@ namespace PantherParking.Web.Controllers
         
         //This is the checkin End Point 
         [Route("api/Location/checkOut")]
-        public HttpResponseMessage PostLogin([FromBody] CheckIn data)
+        public HttpResponseMessage PostCheckOut(CheckIn data)
         {
             LocationResponse response = this.LocationService.CheckOut(data);
             return this.Request.CreateResponse(HttpStatusCode.OK, response);

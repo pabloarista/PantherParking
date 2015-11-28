@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Web.Http;
 using PantherParking.Services.Login;
 using PantherParking.Data.Models;
+using PantherParking.Data.Models.ResponseModels;
+using PantherParking.Services.HistoricalData;
 
 namespace PantherParking.Web.Controllers
 {
