@@ -40,7 +40,11 @@ namespace PantherParking.Data.DAL.Repositories
                 email = "test@me.com",
                 garageID = null,
             };
-            ResponseDatastore<ObjectCreatedResponse> r = br.CreateObject<ObjectCreatedResponse>(u, "");
+
+            ResponseDatastore<ObjectCreatedResponse> rp = br.PostResponse<ObjectCreatedResponse>(u,
+                        u.token, DatastoreType.Users);
+
+            //ResponseDatastore<ObjectCreatedResponse> r = br.CreateObject<ObjectCreatedResponse>(u, "");
 
             ResponseDatastore<User> rr = br.GetObject<User>("", new Dictionary<string, string>(1) {{"username", u.username}});
 
