@@ -17,7 +17,7 @@ namespace PantherParking.Web.Controllers
 
         //This is the historicaldata End Point 
         [Route("api/HistoricalData/getLastFiveWeeks")]
-        public HttpResponseMessage PostGetLastFiveWeeks()
+        public HttpResponseMessage GetLastFiveWeeks()
         {
             HistoricalDataResponse response = this.HistoricalDataService.GetLastFiveWeeks();
             return this.Request.CreateResponse(HttpStatusCode.OK, response);
@@ -25,7 +25,7 @@ namespace PantherParking.Web.Controllers
         
         //This is the historicaldata End Point 
         [Route("api/HistoricalData/getWeeklyHistory")]
-        public HttpResponseMessage PostGetWeeklyHistory([FromBody] int weekId)
+        public HttpResponseMessage GetWeeklyHistory([FromBody] int weekId)
         {
             HistoricalDataResponse response = this.HistoricalDataService.GetWeeklyHistory(weekId);
             return this.Request.CreateResponse(HttpStatusCode.OK, response);
@@ -33,7 +33,7 @@ namespace PantherParking.Web.Controllers
         
         //This is the historicaldata End Point 
         [Route("api/HistoricalData/getColor")]
-        public HttpResponseMessage PostGetColor([FromBody] int lotId)
+        public HttpResponseMessage GetColor([FromBody] int lotId)
         {
             HistoricalDataResponse response = this.HistoricalDataService.GetColor(lotId);
             return this.Request.CreateResponse(HttpStatusCode.OK, response);
@@ -41,7 +41,7 @@ namespace PantherParking.Web.Controllers
         
         //This is the historicaldata End Point 
         [Route("api/HistoricalData/getSpacesAvailable")]
-        public HttpResponseMessage PostGetSpacesAvailable([FromBody] int lotId)
+        public HttpResponseMessage GetSpacesAvailable([FromBody] int lotId)
         {
             HistoricalDataResponse response = this.HistoricalDataService.GetSpacesAvailable(lotId);
             return this.Request.CreateResponse(HttpStatusCode.OK, response);
