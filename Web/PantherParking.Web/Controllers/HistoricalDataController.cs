@@ -11,7 +11,7 @@ using PantherParking.Services.HistoricalData;
 
 namespace PantherParking.Web.Controllers
 {
-    public class HistoricalDataController : ApiController
+    public class HistoricalDataController : BaseController
     {
         public IHistoricalDataService HistoricalDataService { get; set; }
 

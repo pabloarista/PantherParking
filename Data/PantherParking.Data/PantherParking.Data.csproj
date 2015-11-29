@@ -78,9 +78,9 @@
     <Compile Include="Models\Attributes\SerializePropertyAttribute.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\CheckIn.cs" />
-    <Compile Include="Models\ClassCalendar.cs" />
-    <Compile Include="Models\ClassGarage.cs" />
-    <Compile Include="Models\ClassHistory.cs" />
+    <Compile Include="Models\Calendar.cs" />
+    <Compile Include="Models\Garage.cs" />
+    <Compile Include="Models\History.cs" />
     <Compile Include="Models\enumerations\AcademicCalendarSeason.cs" />
     <Compile Include="Models\enumerations\HttpMethod.cs" />
     <Compile Include="Models\IBaseModel.cs" />

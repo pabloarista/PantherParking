@@ -30,6 +30,21 @@ namespace PantherParking.Data.DAL.Repositories
             //BaseRepository br = new BaseRepository();
             //dynamic response = br.RetrieveRestApiResponse<object>(BaseRepository.ParseUrlPrefix + "classes/JsonTest", HttpMethod.Post,
             //    new {foo = "bar"}, null, false);
+
+            BaseRepository br = new BaseRepository();
+
+            User u = new User
+            {
+                username = "test@me.com",
+                adminUser = false,
+                email = "test@me.com",
+                garageID = null,
+            };
+            ResponseDatastore<ObjectCreatedResponse> r = br.CreateObject<ObjectCreatedResponse>(u, "");
+
+            ResponseDatastore<User> rr = br.GetObject<User>("", new Dictionary<string, string>(1) {{"username", u.username}});
+
+
         }
 
         public enum DatastoreType
@@ -101,7 +116,7 @@ namespace PantherParking.Data.DAL.Repositories
         public ResponseDatastore<TResponseResult> CreateObject<TResponseResult>(IBaseModel model, string token)
             where TResponseResult : IBaseModel
         {
-            string url = BaseRepository.ParseUrlPrefix + "classes/" + model.GetType();
+            string url = BaseRepository.ParseUrlPrefix + "classes/" + model.GetType().Name;
 
             ResponseDatastore<TResponseResult> r = this.RetrieveRestApiResponse<TResponseResult>(url, HttpMethod.Post, model, token);
 
@@ -111,7 +126,7 @@ namespace PantherParking.Data.DAL.Repositories
         public ResponseDatastore<TResponseResult> ChangeObject<TResponseResult>(IBaseModel model, string token, HttpMethod httpMethod)
             where TResponseResult : IBaseModel
         {
-            string url = $"{BaseRepository.ParseUrlPrefix}classes/{model.GetType()}/{model.objectId}";
+            string url = $"{BaseRepository.ParseUrlPrefix}classes/{model.GetType().Name}/{model.objectId}";
 
             ResponseDatastore<TResponseResult> r = this.RetrieveRestApiResponse<TResponseResult>(url, httpMethod, model, token);
 
@@ -134,7 +149,7 @@ namespace PantherParking.Data.DAL.Repositories
             where TResponseResult : IBaseModel
         {
 
-            StringBuilder sbUrl = new StringBuilder(BaseRepository.ParseUrlPrefix + "classes/" + typeof(TResponseResult) + "?where={");
+            StringBuilder sbUrl = new StringBuilder(BaseRepository.ParseUrlPrefix + "classes/" + typeof(TResponseResult).Name + "?where={");
             bool begin = true;
             foreach (KeyValuePair<string, string> kvp in constraints)
             {

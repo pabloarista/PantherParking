@@ -11,7 +11,7 @@ using PantherParking.Services.Location;
 
 namespace PantherParking.Web.Controllers
 {
-    public class LocationController : ApiController
+    public class LocationController : BaseController
     {
         public ILocationService LocationService { get; set; }
 

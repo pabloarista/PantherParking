@@ -10,7 +10,7 @@ using PantherParking.Data.Models.ResponseModels;
 
 namespace PantherParking.Web.Controllers
 {
-    public class RegistrationController : ApiController
+    public class RegistrationController : BaseController
     {
         public IRegistrationService RegistrationService { get; set; }
 

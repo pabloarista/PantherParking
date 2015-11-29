@@ -2,10 +2,8 @@
 
 namespace PantherParking.Data.Models
 {
-    public class ClassGarage : BaseModel
+    public class Garage : BaseModel
     {
-        [JsonProperty("objectId")]
-        public string Id { get; set; }
         public int numCheckedIn { get; set; }
         public int numSpaces { get; set; }
     }

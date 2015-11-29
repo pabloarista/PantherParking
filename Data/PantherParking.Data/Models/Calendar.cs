@@ -3,7 +3,7 @@ using PantherParking.Data.Models.enumerations;
 
 namespace PantherParking.Data.Models
 {
-    public class ClassCalendar: BaseModel
+    public class Calendar: BaseModel
     {
         public string semesterID { get; set; }
         public int year { get; set; }

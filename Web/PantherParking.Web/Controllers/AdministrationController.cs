@@ -10,7 +10,7 @@ using PantherParking.Web.Models.Administration;
 
 namespace PantherParking.Web.Controllers
 {
-    public class AdministrationController : ApiController
+    public class AdministrationController : BaseController
     {
         public IAdministrationService AdministrationService { get; set; }
 
