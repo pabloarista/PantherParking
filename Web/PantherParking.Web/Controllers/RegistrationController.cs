@@ -18,6 +18,17 @@ namespace PantherParking.Web.Controllers
         [Route("api/Registration/register")]
         public HttpResponseMessage PostRegister(User userData)
         {
+            if (userData == null)
+            {
+                return this.Request.CreateResponse(HttpStatusCode.BadRequest, "User data was not populated. Unable to register user.");
+            }//if
+
+            if (userData.password != userData.passwordConfirm)
+            {
+                return this.Request.CreateResponse(HttpStatusCode.BadRequest, "Passwords do not much. Unable to register user.");
+            }
+
+
             RegistrationResponse  response = this.RegistrationService.Register(userData);
             return this.Request.CreateResponse(HttpStatusCode.OK, response);
         }

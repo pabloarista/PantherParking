@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Xml;
+using System.Xml.Linq;
+using Newtonsoft.Json;
 using PantherParking.Data.DAL.Interfaces;
 using PantherParking.Data.Models;
 using PantherParking.Data.Models.enumerations;
@@ -19,8 +22,9 @@ namespace PantherParking.Data.DAL.Repositories
 
                 return r != null && r.HttpStatusCode == HttpStatusCode.OK && r.ResponseBody != null;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
+                ex.Data["Email"] = email;
                 return false;
             }
         }
@@ -29,9 +33,9 @@ namespace PantherParking.Data.DAL.Repositories
         {
             try
             {
-                var response = validateUserRegistration(user);
+                bool validUser = this.ValidateUserRegistration(user);
 
-                if (response.ResponseValue)
+                if (validUser)
                 {
 
                     string url = $"{BaseRepository.ParseUrlPrefix}users/";
@@ -53,42 +57,26 @@ namespace PantherParking.Data.DAL.Repositories
                     ResponseMessage = "User already exists."
                 };
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
+                ex.Data["User"] = user.ToXml() + "";
                 throw;
             }
         }
 
-        private RegistrationResponse validateUserRegistration(User user)
+        private bool ValidateUserRegistration(User user)
         {
+            try
+            {
+                bool isNewUser = this.CheckDuplicateRegistration(user.email);
 
-            throw new NotImplementedException();
-            //try
-            //{
-            //    RegistrationResponse response = new RegistrationResponse();
-            //    bool isNewUser = CheckDuplicateRegistration(user.email);
-            //    bool passwordIsMatched = user.Password.Equals(user.tempPassword);
-            //    user.tempPassword = null;
-            //    if (isNewUser == passwordIsMatched)
-            //    {
-            //        response.ResponseValue = true;
-            //        response.ResponseMessage = "SUCESS: User has been validated";
-            //    }
-            //    else
-            //    {
-            //        response.ResponseValue = true;
-            //        if (!isNewUser)
-            //            response.ResponseMessage = "ERROR: User has been taken";
-            //        else
-            //            response.ResponseMessage = "ERROR: Passwords don't match";
-            //    }
-
-            //    return response;
-            //}
-            //catch (Exception e)
-            //{
-            //    throw;
-            //}
+                return isNewUser;
+            }//try
+            catch (Exception ex)
+            {
+                ex.Data["User"] = user.ToXml() + "";
+                return false;
+            }
         }
     }
 }

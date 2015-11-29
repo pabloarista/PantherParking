@@ -4,6 +4,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Linq;
 using Newtonsoft.Json;
 
 
@@ -32,6 +34,15 @@ namespace PantherParking.Data.Models
             TModel o = JsonConvert.DeserializeObject<TModel>(json);
 
             return o;
+        }
+
+        public XElement ToXml()
+        {
+            string json = this.ToJson();
+            XmlDocument xmlDoc = JsonConvert.DeserializeXmlNode(json);
+            XElement xml = XElement.Load(new XmlNodeReader(xmlDoc));
+
+            return xml;
         }
     }
 }
