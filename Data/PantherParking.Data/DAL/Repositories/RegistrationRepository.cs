@@ -18,7 +18,7 @@ namespace PantherParking.Data.DAL.Repositories
         {
             try
             {
-                ResponseParse<User> r = base.GetObject<User>(null, new Dictionary<string, string>(1) { { "email", email } });
+                ResponseDatastore<User> r = base.GetObject<User>(null, new Dictionary<string, string>(1) { { "email", email } });
 
                 return r != null && r.HttpStatusCode == HttpStatusCode.OK && r.ResponseBody != null;
             }
@@ -37,10 +37,8 @@ namespace PantherParking.Data.DAL.Repositories
 
                 if (validUser)
                 {
-
-                    string url = $"{BaseRepository.ParseUrlPrefix}users/";
-
-                    ResponseParse<ObjectCreatedResponse> rp = base.GetRestApiResponse<ObjectCreatedResponse>(url, HttpMethod.Post, user, user.token);
+                    ResponseDatastore<ObjectCreatedResponse> rp = base.PostResponse<ObjectCreatedResponse>(user,
+                        user.token, DatastoreType.Users);
 
                     bool created = rp != null && rp.HttpStatusCode == HttpStatusCode.Created;
 

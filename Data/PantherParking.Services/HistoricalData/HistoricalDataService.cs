@@ -1,4 +1,5 @@
 ﻿using PantherParking.Data.DAL.Interfaces;
+using PantherParking.Data.Models.ResponseModels;
 
 namespace PantherParking.Services.HistoricalData
 {
@@ -11,12 +12,12 @@ namespace PantherParking.Services.HistoricalData
             this.historicalDataRepository = historicalDataRepository;
         }
 
-        public HistoricalDataResponse[] GetLastFiveWeeks()
+        public HistoricalDataResponse GetLastFiveWeeks()
         {
             return this.historicalDataRepository.GetLastFiveWeeks();
         }
 
-        public HistoricalDataResponse[] GetWeeklyHistory(int weekID)
+        public HistoricalDataResponse GetWeeklyHistory(int weekID)
         {
             return this.historicalDataRepository.GetWeeklyHistory(weekID);
         }

@@ -179,6 +179,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Models\Administration\HolidayRequest.cs" />
+    <Compile Include="Models\Administration\AcademicCalendarRequest.cs" />
     <Compile Include="Controllers\AdministrationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HistoricalDataController.cs" />
@@ -203,7 +205,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="Providers\" />
     <Folder Include="Results\" />
   </ItemGroup>

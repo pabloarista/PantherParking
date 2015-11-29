@@ -1,5 +1,6 @@
 ﻿using PantherParking.Data.DAL.Interfaces;
 using PantherParking.Data.Models;
+using PantherParking.Data.Models.ResponseModels;
 
 namespace PantherParking.Services.Login
 {
@@ -14,12 +15,12 @@ namespace PantherParking.Services.Login
 
         public LoginResponse Login(User userData)
         {
-            return this.loginRepository.Login(username, password);
+            return this.loginRepository.Login(userData);
         }
 
         public LoginResponse Logout(User userData)
         {
-            return this.loginRepository.Logout(username);
+            return this.loginRepository.Logout(userData);
         }
 
         public bool ValidateSession(string token)

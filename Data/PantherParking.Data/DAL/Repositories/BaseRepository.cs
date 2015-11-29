@@ -28,8 +28,52 @@ namespace PantherParking.Data.DAL.Repositories
         public static void Main()
         {
             //BaseRepository br = new BaseRepository();
-            //dynamic response = br.GetRestApiResponse<object>(BaseRepository.ParseUrlPrefix + "classes/JsonTest", HttpMethod.Post,
+            //dynamic response = br.RetrieveRestApiResponse<object>(BaseRepository.ParseUrlPrefix + "classes/JsonTest", HttpMethod.Post,
             //    new {foo = "bar"}, null, false);
+        }
+
+        public enum DatastoreType
+        {
+            [Description("classes")]
+            Entity = 1,
+            [Description("login")]
+            Login = 2,
+            [Description("users")]
+            Users = 4
+        }
+
+        public ResponseDatastore<TResponseResult> PostResponse<TResponseResult>(
+            IBaseModel contents
+            , string token
+            , DatastoreType datastoreType)
+            where TResponseResult : IBaseModel
+        {
+            return this.RetrieveResponse<TResponseResult>(HttpMethod.Post, contents, token, datastoreType);
+        }
+
+        public ResponseDatastore<TResponseResult> GetResponse<TResponseResult>(
+            IBaseModel contents
+            , string token
+            , DatastoreType datastoreType)
+            where TResponseResult : IBaseModel
+        {
+            return this.RetrieveResponse<TResponseResult>(HttpMethod.Get, contents, token, datastoreType);
+        }
+
+        public ResponseDatastore<TResponseResult> RetrieveResponse<TResponseResult>(
+            HttpMethod httpMethod
+            , IBaseModel contents
+            , string token
+            , DatastoreType datastoreType)
+            where TResponseResult : IBaseModel
+        {
+            string url = $"{BaseRepository.ParseUrlPrefix + BaseRepository.GetEnumDescription(datastoreType)}/";
+            if (datastoreType == DatastoreType.Entity)
+            {
+                url += contents.GetType().Name;
+            }//if
+
+            return this.RetrieveRestApiResponse<TResponseResult>(url, httpMethod, contents, token);
         }
 
 #warning TODO: here we need the call to our datastore that shall be inherited by all repository classes
@@ -54,38 +98,38 @@ namespace PantherParking.Data.DAL.Repositories
                 : value.ToString();
         }
 
-        public ResponseParse<TResponseResult> CreateObject<TResponseResult>(IBaseModel model, string token)
+        public ResponseDatastore<TResponseResult> CreateObject<TResponseResult>(IBaseModel model, string token)
             where TResponseResult : IBaseModel
         {
             string url = BaseRepository.ParseUrlPrefix + "classes/" + model.GetType();
 
-            ResponseParse<TResponseResult> r = this.GetRestApiResponse<TResponseResult>(url, HttpMethod.Post, model, token);
+            ResponseDatastore<TResponseResult> r = this.RetrieveRestApiResponse<TResponseResult>(url, HttpMethod.Post, model, token);
 
             return r;
         }
 
-        public ResponseParse<TResponseResult> ChangeObject<TResponseResult>(IBaseModel model, string token, HttpMethod httpMethod)
+        public ResponseDatastore<TResponseResult> ChangeObject<TResponseResult>(IBaseModel model, string token, HttpMethod httpMethod)
             where TResponseResult : IBaseModel
         {
             string url = $"{BaseRepository.ParseUrlPrefix}classes/{model.GetType()}/{model.objectId}";
 
-            ResponseParse<TResponseResult> r = this.GetRestApiResponse<TResponseResult>(url, httpMethod, model, token);
+            ResponseDatastore<TResponseResult> r = this.RetrieveRestApiResponse<TResponseResult>(url, httpMethod, model, token);
 
             return r;
         }
 
-        public ResponseParse<ObjectUpdatedResponse> UpdateObject(IBaseModel model, string token)
+        public ResponseDatastore<ObjectUpdatedResponse> UpdateObject(IBaseModel model, string token)
         {
             return this.ChangeObject<ObjectUpdatedResponse>(model, token, HttpMethod.Put);
         }
 
-        public ResponseParse<TResponseResult> DeleteObject<TResponseResult>(IBaseModel model, string token)
+        public ResponseDatastore<TResponseResult> DeleteObject<TResponseResult>(IBaseModel model, string token)
             where TResponseResult : IBaseModel
         {
             return this.ChangeObject<TResponseResult>(model, token, HttpMethod.Delete);
         }
 
-        public ResponseParse<TResponseResult> GetObject<TResponseResult>(string token,
+        public ResponseDatastore<TResponseResult> GetObject<TResponseResult>(string token,
             Dictionary<string, string> constraints)
             where TResponseResult : IBaseModel
         {
@@ -108,7 +152,7 @@ namespace PantherParking.Data.DAL.Repositories
 
             sbUrl.Append("}");
 
-            ResponseParse<TResponseResult> r = this.GetRestApiResponse<TResponseResult>(sbUrl + "", HttpMethod.Get, null,
+            ResponseDatastore<TResponseResult> r = this.RetrieveRestApiResponse<TResponseResult>(sbUrl + "", HttpMethod.Get, null,
                 token);
 
             return r;
@@ -121,12 +165,10 @@ namespace PantherParking.Data.DAL.Repositories
   --data-urlencode 'where={"playerName":"Sean Plott","cheatMode":false}' \
   https://api.parse.com/1/classes/GameScore*/
 
-        public ResponseParse<TResponseResult> GetRestApiResponse<TResponseResult>(string url
+        public ResponseDatastore<TResponseResult> RetrieveRestApiResponse<TResponseResult>(string url
                                 , HttpMethod httpMethod
                                 , IBaseModel contents
-                                , string token
-                                //, bool session
-            )
+                                , string token)
             where TResponseResult : IBaseModel
         {
             HttpWebRequest request = null;
@@ -187,7 +229,7 @@ namespace PantherParking.Data.DAL.Repositories
                     }
                 }//if
                 //TResponseResult noResponseResult = null;
-                ResponseParse<TResponseResult> rp = new ResponseParse<TResponseResult>
+                ResponseDatastore<TResponseResult> rp = new ResponseDatastore<TResponseResult>
                 {
                     HttpStatusCode = response.StatusCode,
                     ResponseBody = string.IsNullOrWhiteSpace(parseResponse) ? default(TResponseResult) : BaseModel.GetModel<TResponseResult>(parseResponse)

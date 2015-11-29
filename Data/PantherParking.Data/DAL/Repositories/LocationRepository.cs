@@ -14,7 +14,7 @@ namespace PantherParking.Data.DAL.Repositories
         {
             try
             {
-                ResponseParse<User> r = base.GetObject<User>(data.Token, new Dictionary<string, string>(1) { { "userName", data.Username } });
+                ResponseDatastore<User> r = base.GetObject<User>(data.Token, new Dictionary<string, string>(1) { { "userName", data.Username } });
 
                 if (r == null
                     || r.HttpStatusCode != HttpStatusCode.OK
@@ -34,7 +34,7 @@ namespace PantherParking.Data.DAL.Repositories
                 User u = r.ResponseBody;
                 u.garageID = data.GarageId;
 
-                ResponseParse<ObjectUpdatedResponse> updateResponse = base.UpdateObject(u, data.Token);
+                ResponseDatastore<ObjectUpdatedResponse> updateResponse = base.UpdateObject(u, data.Token);
 
                 LocationResponse lr = new LocationResponse
                 {
@@ -58,7 +58,7 @@ namespace PantherParking.Data.DAL.Repositories
         {
             try
             {
-                ResponseParse<User> r = base.GetObject<User>(data.Token, new Dictionary<string, string>(1) { { "userName", data.Username } });
+                ResponseDatastore<User> r = base.GetObject<User>(data.Token, new Dictionary<string, string>(1) { { "userName", data.Username } });
 
                 if (r == null
                     || r.HttpStatusCode != HttpStatusCode.OK
@@ -78,7 +78,7 @@ namespace PantherParking.Data.DAL.Repositories
                 User u = r.ResponseBody;
                 u.garageID = null;
 
-                ResponseParse<ObjectUpdatedResponse> updateResponse = base.UpdateObject(u, data.Token);
+                ResponseDatastore<ObjectUpdatedResponse> updateResponse = base.UpdateObject(u, data.Token);
 
                 LocationResponse lr = new LocationResponse
                 {
