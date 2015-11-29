@@ -5,8 +5,6 @@ namespace PantherParking.Data.Models
 {
     public class ClassCalendar: BaseModel
     {
-        [JsonProperty("objectId")]
-        public string Id { get; set; }
         public string semesterID { get; set; }
         public int year { get; set; }
         public System.DateTime startDate { get; set; }

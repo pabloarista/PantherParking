@@ -35,12 +35,15 @@ namespace PantherParking.Data.DAL.Repositories
             int year = begin.Year;
             AcademicCalendarSeason season = this.GetSeason(begin.Month);
 
-            AcademicCalendar calendar = new AcademicCalendar
+            ClassCalendar calendar = new ClassCalendar
             {
-                beginDateTime = begin,
+                startDate = begin,
+                endDate = end,
                 season = season,
                 year = year
             };
+
+            
 
             return false;
         }
