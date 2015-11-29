@@ -7,6 +7,7 @@ using System.Web.Http;
 using PantherParking.Services.Registration;
 using PantherParking.Data.Models;
 using PantherParking.Data.Models.ResponseModels;
+using PantherParking.Web.Models.Registration;
 
 namespace PantherParking.Web.Controllers
 {
@@ -16,22 +17,30 @@ namespace PantherParking.Web.Controllers
 
         //This is the registration End Point 
         [Route("api/Registration/register")]
-        public HttpResponseMessage PostRegister(User userData)
+        public HttpResponseMessage PostRegister(RegistrationRequest request)
         {
-            if (userData == null)
+            if (request == null)
             {
-                return this.Request.CreateResponse(HttpStatusCode.BadRequest, "User data was not populated. Unable to register user.");
+                return base.CreateErrorEmptyResponse();
             }//if
-
-            if (userData.password != userData.passwordConfirm)
+            
+            if (request.password != request.passwordConfirm)
             {
                 return this.Request.CreateResponse(HttpStatusCode.BadRequest, "Passwords do not much. Unable to register user.");
             }
 
 
-            RegistrationResponse  response = this.RegistrationService.Register(userData);
+            User u = new User
+            {
+                username = request.username,
+                firstName = request.firstName,
+                lastName = request.lastName,
+                email = request.email,
+                password = request.password,
+            };
+
+            RegistrationResponse  response = this.RegistrationService.Register(u);
             return this.Request.CreateResponse(HttpStatusCode.OK, response);
-        }
-        
+        }  
     }
 }

@@ -17,7 +17,11 @@ namespace PantherParking.Web.Controllers
 
         //This is the historicaldata End Point 
         [Route("api/HistoricalData/getLastFiveWeeks")]
+<<<<<<< HEAD
         public HttpResponseMessage GetLastFiveWeeks()
+=======
+        public HttpResponseMessage PostGetLastFiveWeeks(User user)
+>>>>>>> master
         {
             HistoricalDataResponse response = this.HistoricalDataService.GetLastFiveWeeks();
             return this.Request.CreateResponse(HttpStatusCode.OK, response);
@@ -25,7 +29,11 @@ namespace PantherParking.Web.Controllers
         
         //This is the historicaldata End Point 
         [Route("api/HistoricalData/getWeeklyHistory")]
+<<<<<<< HEAD
         public HttpResponseMessage GetWeeklyHistory([FromBody] int weekId)
+=======
+        public HttpResponseMessage PostGetWeeklyHistory(User user, int weekId)
+>>>>>>> master
         {
             HistoricalDataResponse response = this.HistoricalDataService.GetWeeklyHistory(weekId);
             return this.Request.CreateResponse(HttpStatusCode.OK, response);

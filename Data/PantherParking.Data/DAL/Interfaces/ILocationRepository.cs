@@ -5,7 +5,7 @@ namespace PantherParking.Data.DAL.Interfaces
 {
     public interface ILocationRepository
     {
-        LocationResponse CheckIn(CheckIn data);
-        LocationResponse CheckOut(CheckIn data);
+        LocationResponse CheckIn(User data);
+        LocationResponse CheckOut(User data);
     }
 }

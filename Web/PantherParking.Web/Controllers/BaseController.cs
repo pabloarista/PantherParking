@@ -13,5 +13,10 @@ namespace PantherParking.Web.Controllers
         {
             ObjectFactory.BuildUp(this);
         }
+
+        protected HttpResponseMessage CreateErrorEmptyResponse()
+        {
+            return this.Request.CreateResponse(HttpStatusCode.BadRequest, "Request headers are empty, unable to complete request.");
+        }
     }
 }

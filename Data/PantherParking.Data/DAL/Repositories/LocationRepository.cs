@@ -10,11 +10,11 @@ namespace PantherParking.Data.DAL.Repositories
 {
     public class LocationRepository : BaseRepository, ILocationRepository
     {
-        public LocationResponse CheckIn(CheckIn data)
+        public LocationResponse CheckIn(User data)
         {
             try
             {
-                ResponseDatastore<User> r = base.GetObject<User>(data.Token, new Dictionary<string, string>(1) { { "userName", data.Username } });
+                ResponseDatastore<User> r = base.GetObject<User>(data.sessionToken, new Dictionary<string, string>(1) { { "userName", data.username } });
 
                 if (r == null
                     || r.HttpStatusCode != HttpStatusCode.OK
@@ -32,9 +32,9 @@ namespace PantherParking.Data.DAL.Repositories
                 }//if
 
                 User u = r.ResponseBody;
-                u.garageID = data.GarageId;
+                u.garageID = data.garageID;
 
-                ResponseDatastore<ObjectUpdatedResponse> updateResponse = base.UpdateObject(u, data.Token);
+                ResponseDatastore<ObjectUpdatedResponse> updateResponse = base.UpdateObject(u, data.sessionToken);
 
                 LocationResponse lr = new LocationResponse
                 {
@@ -54,11 +54,11 @@ namespace PantherParking.Data.DAL.Repositories
             }//catch
         }
 
-        public LocationResponse CheckOut(CheckIn data)
+        public LocationResponse CheckOut(User data)
         {
             try
             {
-                ResponseDatastore<User> r = base.GetObject<User>(data.Token, new Dictionary<string, string>(1) { { "userName", data.Username } });
+                ResponseDatastore<User> r = base.GetObject<User>(data.sessionToken, new Dictionary<string, string>(1) { { "userName", data.username } });
 
                 if (r == null
                     || r.HttpStatusCode != HttpStatusCode.OK
@@ -78,7 +78,7 @@ namespace PantherParking.Data.DAL.Repositories
                 User u = r.ResponseBody;
                 u.garageID = null;
 
-                ResponseDatastore<ObjectUpdatedResponse> updateResponse = base.UpdateObject(u, data.Token);
+                ResponseDatastore<ObjectUpdatedResponse> updateResponse = base.UpdateObject(u, data.sessionToken);
 
                 LocationResponse lr = new LocationResponse
                 {

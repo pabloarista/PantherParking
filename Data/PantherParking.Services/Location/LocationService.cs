@@ -12,12 +12,12 @@ namespace PantherParking.Services.Location
         {
             this.locationRepository = locationRepository;
         }
-        public LocationResponse CheckIn(CheckIn data)
+        public LocationResponse CheckIn(User data)
         {
             return this.locationRepository.CheckIn(data);
         }
 
-        public LocationResponse CheckOut(CheckIn data)
+        public LocationResponse CheckOut(User data)
         {
             return this.locationRepository.CheckOut(data);
         }

@@ -10,7 +10,7 @@ namespace PantherParking.Data.DAL.Repositories
 {
     public class AdministrationRepository : BaseRepository, IAdministrationRepository
     {
-        private AcademicCalendarSeason GetSeason(int month)
+        internal AcademicCalendarSeason GetSeason(int month)
         {
             AcademicCalendarSeason season;
 

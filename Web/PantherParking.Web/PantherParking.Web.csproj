@@ -179,6 +179,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Models\Location\CheckinRequest.cs" />
+    <Compile Include="Models\Location\CheckoutRequest.cs" />
+    <Compile Include="Models\Registration\RegistrationRequest.cs" />
+    <Compile Include="Models\Login\LoginRequest.cs" />
+    <Compile Include="Models\Login\LogoutRequest.cs" />
     <Compile Include="Models\Administration\HolidayRequest.cs" />
     <Compile Include="Models\Administration\AcademicCalendarRequest.cs" />
     <Compile Include="Controllers\AdministrationController.cs" />
@@ -195,7 +200,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -220,6 +227,9 @@
       <Project>{622a34ea-e965-4616-9170-ac21e5eca2bb}</Project>
       <Name>PantherParking.Services</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\CEN4010.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

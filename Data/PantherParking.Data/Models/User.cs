@@ -10,8 +10,6 @@ namespace PantherParking.Data.Models
         public string lastName { get; set; }
         public string email { get; set; }
         public string password { get; set; }
-        [JsonIgnore]
-        public string passwordConfirm { get; set; }
         public bool adminUser { get; set; }
         public bool locked { get; set; }
         public DateTime lastLoginDateTime { get; set; }
