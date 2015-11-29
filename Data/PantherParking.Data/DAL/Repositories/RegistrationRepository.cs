@@ -38,7 +38,7 @@ namespace PantherParking.Data.DAL.Repositories
                 if (validUser)
                 {
                     ResponseDatastore<ObjectCreatedResponse> rp = base.PostResponse<ObjectCreatedResponse>(user,
-                        user.token, DatastoreType.Users);
+                        user.sessionToken, DatastoreType.Users);
 
                     bool created = rp != null && rp.HttpStatusCode == HttpStatusCode.Created;
 

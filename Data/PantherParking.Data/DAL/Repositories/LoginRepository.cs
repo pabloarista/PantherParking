@@ -50,7 +50,7 @@ namespace PantherParking.Data.DAL.Repositories
             if (r != null && r.HttpStatusCode == HttpStatusCode.OK && r.ResponseBody != null)
             {
                 User u = r.ResponseBody;
-                u.token = null;
+                u.sessionToken = null;
 #warning TODO: can we make the expiration field nullable? or will parse not like a nullable date field?
 
 #warning will we be able to null out a token without a token?

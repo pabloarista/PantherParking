@@ -13,7 +13,14 @@ namespace PantherParking.Data.Models
 {
     public class BaseModel : IBaseModel
     {
+
         public string objectId { get; set; }
+
+
+        public bool ShouldSerializeobjectId()
+        {
+            return false;
+        }
 
         public string ToJson()
         {

@@ -38,11 +38,13 @@ namespace PantherParking.Data.DAL.Repositories
                 username = "test@me.com",
                 adminUser = false,
                 email = "test@me.com",
-                garageID = null,
+                garageID = "",
+                password = "test",
+                
             };
 
-            ResponseDatastore<ObjectCreatedResponse> rp = br.PostResponse<ObjectCreatedResponse>(u,
-                        u.token, DatastoreType.Users);
+            //ResponseDatastore<ObjectCreatedResponse> rp = br.PostResponse<ObjectCreatedResponse>(u,
+            //            u.token, DatastoreType.Users);
 
             //ResponseDatastore<ObjectCreatedResponse> r = br.CreateObject<ObjectCreatedResponse>(u, "");
 
@@ -152,8 +154,9 @@ namespace PantherParking.Data.DAL.Repositories
             Dictionary<string, string> constraints)
             where TResponseResult : IBaseModel
         {
-
-            StringBuilder sbUrl = new StringBuilder(BaseRepository.ParseUrlPrefix + "classes/" + typeof(TResponseResult).Name + "?where={");
+            string className = typeof(TResponseResult) == typeof(User) ? "_User" :  typeof (TResponseResult).Name;
+            string urlPrefix = BaseRepository.ParseUrlPrefix + "classes/" + className + "?where=";
+            StringBuilder sbUrl = new StringBuilder("{");
             bool begin = true;
             foreach (KeyValuePair<string, string> kvp in constraints)
             {
@@ -166,12 +169,13 @@ namespace PantherParking.Data.DAL.Repositories
                     sbUrl.Append(",");
                 }//else
                 //WebUtility for non-webapplications
-                sbUrl.Append(HttpUtility.UrlEncode($"\"{kvp.Key}\":\"{kvp.Value}\""));
+                string jsonProp = $"\"{kvp.Key}\":\"{kvp.Value}\"";
+                sbUrl.Append(jsonProp);
             }//foreach kvp
 
             sbUrl.Append("}");
-
-            ResponseDatastore<TResponseResult> r = this.RetrieveRestApiResponse<TResponseResult>(sbUrl + "", HttpMethod.Get, null,
+            string url = urlPrefix + HttpUtility.UrlEncode(sbUrl + "");
+            ResponseDatastore<TResponseResult> r = this.RetrieveRestApiResponse<TResponseResult>(url, HttpMethod.Get, null,
                 token);
 
             return r;
@@ -228,15 +232,22 @@ namespace PantherParking.Data.DAL.Repositories
 
                     using (StreamWriter writer = new StreamWriter(request.GetRequestStream()))
                     {
-
-                        writer.WriteLine(contents.ToJson());
+                        string json = contents.ToJson();
+                        writer.WriteLine(json);
                         writer.Flush();
                         writer.Close();
                     }//using writer
                 }//if
 
-                // Send the data to the webserver
-                response = (HttpWebResponse)request.GetResponse();
+                try
+                {
+                    // Send the data to the webserver
+                    response = (HttpWebResponse)request.GetResponse();
+                }
+                catch (WebException err)
+                {
+                    response = (HttpWebResponse)err.Response;
+                }
                 
                 string parseResponse = null;
                 Stream s = response.GetResponseStream();
