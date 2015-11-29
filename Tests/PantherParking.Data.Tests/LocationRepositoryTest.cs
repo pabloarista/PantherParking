@@ -1,12 +1,12 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+//using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PantherParking.Data.DAL.Repositories;
 using PantherParking.Data.Models;
 using PantherParking.Data.Models.ResponseModels;
-
+using NUnit.Framework;
 namespace PantherParking.Data.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class LocationRepositoryTest
     {
         private readonly LocationRepository locationRepository;
@@ -19,11 +19,11 @@ namespace PantherParking.Data.Tests
         [TestMethod]
         public void CheckInTest()
         {
-            CheckIn data = new CheckIn
+            User data = new User
             {
-                Token = "",
-                GarageId = "",
-                Username = "pantherdude"
+                sessionToken = "",
+                garageID = "",
+                username = "pantherdude"
             };
 
             LocationResponse lr = this.locationRepository.CheckIn(data);
@@ -38,11 +38,11 @@ namespace PantherParking.Data.Tests
         [TestMethod]
         public void CheckOutTest()
         {
-            CheckIn data = new CheckIn
+            User data = new User
             {
-                Token = "",
-                GarageId = "",
-                Username = "pantherdude"
+                sessionToken = "",
+                garageID = "",
+                username = "pantherdude"
             };
 
             LocationResponse lr = this.locationRepository.CheckOut(data);

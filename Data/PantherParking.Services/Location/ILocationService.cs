@@ -5,7 +5,7 @@ namespace PantherParking.Services.Location
 {
     public interface ILocationService
     {
-        LocationResponse CheckIn(CheckIn data);
-        LocationResponse CheckOut(CheckIn data);
+        LocationResponse CheckIn(User data);
+        LocationResponse CheckOut(User data);
     }
 }

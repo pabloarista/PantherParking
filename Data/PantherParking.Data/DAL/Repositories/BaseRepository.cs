@@ -214,7 +214,7 @@ namespace PantherParking.Data.DAL.Repositories
                 {
                     //sample token:
                     //r:pnktnjyb996sj4p156gjtp4im
-                    request.Headers.Add("X-Parse-Session-Token", token);
+                    request.Headers.Add("X-Parse-Session-sessionToken", token);
                 }//if
 
                 //if (session)

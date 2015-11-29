@@ -18,6 +18,11 @@ namespace PantherParking.Web.Controllers
         [Route("api/Admin/AcademicCalendar")]
         public HttpResponseMessage PostAcademicCalendar(AcademicCalendarRequest request)
         {
+            if (request == null)
+            {
+                return base.CreateErrorEmptyResponse();
+            }//if
+
             bool created = this.AdministrationService.SetAcademicCalendar(request.begin, request.end);
             return this.Request.CreateResponse(created ? HttpStatusCode.OK : HttpStatusCode.InternalServerError, created);
         }
@@ -26,6 +31,11 @@ namespace PantherParking.Web.Controllers
         [Route("api/Admin/Holiday")]
         public HttpResponseMessage PostHoliday(HolidayRequest request)
         {
+            if (request == null)
+            {
+                return base.CreateErrorEmptyResponse();
+            }//if
+
             bool created = this.AdministrationService.SetHoliday(request.holiday);
             return this.Request.CreateResponse(created ? HttpStatusCode.OK : HttpStatusCode.InternalServerError, created);
         }

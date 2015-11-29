@@ -179,6 +179,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Models\Location\CheckinRequest.cs" />
+    <Compile Include="Models\Location\CheckoutRequest.cs" />
+    <Compile Include="Models\Registration\RegistrationRequest.cs" />
+    <Compile Include="Models\Login\LoginRequest.cs" />
+    <Compile Include="Models\Login\LogoutRequest.cs" />
     <Compile Include="Models\Administration\HolidayRequest.cs" />
     <Compile Include="Models\Administration\AcademicCalendarRequest.cs" />
     <Compile Include="Controllers\AdministrationController.cs" />

@@ -1,8 +1,6 @@
-using System;
-
-namespace PantherParking.Data.Models
+namespace PantherParking.Web.Models.Location
 {
-    public class CheckIn : BaseModel
+    public class CheckinRequest
     {
         public string username { get; set; }
         public string garageId { get; set; }
