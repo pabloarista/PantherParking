@@ -7,22 +7,22 @@ namespace PantherParking.Data.DAL.Repositories
     {
         public HistoricalDataResponse GetLastFiveWeeks()
         {
-            throw new System.NotImplementedException();
+            return default(HistoricalDataResponse);
         }
 
         public HistoricalDataResponse GetWeeklyHistory(int weekID)
         {
-            throw new System.NotImplementedException();
+            return default(HistoricalDataResponse);
         }
 
         public HistoricalDataResponse GetColor(int lot)
         {
-            throw new System.NotImplementedException();
+            return default(HistoricalDataResponse);
         }
 
         public HistoricalDataResponse GetSpacesAvailable(int lot)
         {
-            throw new System.NotImplementedException();
+            return default(HistoricalDataResponse);
         }
     }
 }

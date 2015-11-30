@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -17,23 +18,18 @@ namespace PantherParking.Web.Controllers
 
         //This is the historicaldata End Point 
         [Route("api/HistoricalData/getLastFiveWeeks")]
-<<<<<<< HEAD
-        public HttpResponseMessage GetLastFiveWeeks()
-=======
-        public HttpResponseMessage PostGetLastFiveWeeks(User user)
->>>>>>> master
+        public HttpResponseMessage GetLastFiveWeeks(User user)
         {
+            EventLog.WriteEntry("Application", "test exception", EventLogEntryType.Error);
+            Elmah.NonWebApplication.ErrorLog.LogNonWebApplicationError(new Exception("test"));
+            throw new Exception("test");
             HistoricalDataResponse response = this.HistoricalDataService.GetLastFiveWeeks();
             return this.Request.CreateResponse(HttpStatusCode.OK, response);
         }
         
         //This is the historicaldata End Point 
         [Route("api/HistoricalData/getWeeklyHistory")]
-<<<<<<< HEAD
-        public HttpResponseMessage GetWeeklyHistory([FromBody] int weekId)
-=======
         public HttpResponseMessage PostGetWeeklyHistory(User user, int weekId)
->>>>>>> master
         {
             HistoricalDataResponse response = this.HistoricalDataService.GetWeeklyHistory(weekId);
             return this.Request.CreateResponse(HttpStatusCode.OK, response);
@@ -41,7 +37,7 @@ namespace PantherParking.Web.Controllers
         
         //This is the historicaldata End Point 
         [Route("api/HistoricalData/getColor")]
-        public HttpResponseMessage GetColor([FromBody] int lotId)
+        public HttpResponseMessage GetColor(int lotId)
         {
             HistoricalDataResponse response = this.HistoricalDataService.GetColor(lotId);
             return this.Request.CreateResponse(HttpStatusCode.OK, response);
@@ -49,7 +45,7 @@ namespace PantherParking.Web.Controllers
         
         //This is the historicaldata End Point 
         [Route("api/HistoricalData/getSpacesAvailable")]
-        public HttpResponseMessage GetSpacesAvailable([FromBody] int lotId)
+        public HttpResponseMessage GetSpacesAvailable(int lotId)
         {
             HistoricalDataResponse response = this.HistoricalDataService.GetSpacesAvailable(lotId);
             return this.Request.CreateResponse(HttpStatusCode.OK, response);
