@@ -20,9 +20,6 @@ namespace PantherParking.Web.Controllers
         [Route("api/HistoricalData/getLastFiveWeeks")]
         public HttpResponseMessage GetLastFiveWeeks(User user)
         {
-            EventLog.WriteEntry("Application", "test exception", EventLogEntryType.Error);
-            Elmah.NonWebApplication.ErrorLog.LogNonWebApplicationError(new Exception("test"));
-            throw new Exception("test");
             HistoricalDataResponse response = this.HistoricalDataService.GetLastFiveWeeks();
             return this.Request.CreateResponse(HttpStatusCode.OK, response);
         }
