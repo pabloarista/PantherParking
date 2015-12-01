@@ -8,6 +8,6 @@ namespace PantherParking.Data.DAL.Interfaces
     {
         LoginResponse Login(User userData);
         LoginResponse Logout(User userData);
-        bool ValidateSession(string token);
+        bool ValidateSession(string sessionToken, string username);
     }
 }

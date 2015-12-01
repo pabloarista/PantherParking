@@ -14,12 +14,14 @@ namespace PantherParking.Data.DAL.Repositories
         {
             try
             {
-                ResponseDatastore<User> r = base.GetObject<User>(data.sessionToken, new Dictionary<string, string>(1) { { "userName", data.username } });
+                //ResponseDatastore<User> rr = br.GetObject<User>("", new Dictionary<string, string>(1) { { "username", u.username } });
+
+                ResponseDatastore<ObjectGetAllResponse<User>> r = base.GetObject<ObjectGetAllResponse<User>,User>(data.sessionToken, new Dictionary<string, string>(1) { { "username", data.username } });
 
                 if (r == null
                     || r.HttpStatusCode != HttpStatusCode.OK
                     || r.ResponseBody == null
-                    || !string.IsNullOrWhiteSpace(r.ResponseBody.garageID))
+                    || !string.IsNullOrWhiteSpace(r.ResponseBody?.results?[0]?.garageID))
                 {
                     return new LocationResponse
                     {
@@ -27,11 +29,12 @@ namespace PantherParking.Data.DAL.Repositories
                         ResponseMessage =
                             r == null
                             ? "User was not found! Unable to check in."
-                            : "User is already checked in! Unable to check in until the user checks out of the previous parking garage!"
+                            : "User is already checked in! Unable to check in until the user checks out of the previous parking garage!",
+                        HttpStatusCode = HttpStatusCode.BadRequest
                     };
                 }//if
 
-                User u = r.ResponseBody;
+                User u = r.ResponseBody.results?[0];
                 u.garageID = data.garageID;
 
                 ResponseDatastore<ObjectUpdatedResponse> updateResponse = base.UpdateObject(u, data.sessionToken);
@@ -39,7 +42,8 @@ namespace PantherParking.Data.DAL.Repositories
                 LocationResponse lr = new LocationResponse
                 {
                     ResponseValue = updateResponse?.ResponseBody != null,
-                    ResponseMessage = ""
+                    ResponseMessage = "",
+                    HttpStatusCode = updateResponse?.HttpStatusCode ?? HttpStatusCode.InternalServerError
                 };
                 return lr;
             }//try
@@ -49,7 +53,8 @@ namespace PantherParking.Data.DAL.Repositories
                 return new LocationResponse
                 {
                     ResponseMessage = ex.GetBaseException().Message,
-                    ResponseValue = false
+                    ResponseValue = false,
+                    HttpStatusCode = HttpStatusCode.InternalServerError
                 };
             }//catch
         }
@@ -58,12 +63,12 @@ namespace PantherParking.Data.DAL.Repositories
         {
             try
             {
-                ResponseDatastore<User> r = base.GetObject<User>(data.sessionToken, new Dictionary<string, string>(1) { { "userName", data.username } });
+                ResponseDatastore<ObjectGetAllResponse<User>> r = base.GetObject<ObjectGetAllResponse<User>,User>(data.sessionToken, new Dictionary<string, string>(1) { { "userName", data.username } });
 
                 if (r == null
                     || r.HttpStatusCode != HttpStatusCode.OK
                     || r.ResponseBody == null
-                    || !string.IsNullOrWhiteSpace(r.ResponseBody.garageID))
+                    || !string.IsNullOrWhiteSpace(r.ResponseBody?.results?[0]?.garageID))
                 {
                     return new LocationResponse
                     {
@@ -71,11 +76,12 @@ namespace PantherParking.Data.DAL.Repositories
                         ResponseMessage =
                             r == null
                             ? "User was not found! Unable to check out."
-                            : "User is not checked in! Unable to check out!"
+                            : "User is not checked in! Unable to check out!",
+                        HttpStatusCode = HttpStatusCode.InternalServerError
                     };
                 }//if
 
-                User u = r.ResponseBody;
+                User u = r.ResponseBody?.results?[0];
                 u.garageID = null;
 
                 ResponseDatastore<ObjectUpdatedResponse> updateResponse = base.UpdateObject(u, data.sessionToken);
@@ -84,6 +90,7 @@ namespace PantherParking.Data.DAL.Repositories
                 {
                     ResponseValue = updateResponse?.ResponseBody != null,
                     ResponseMessage = "",
+                    HttpStatusCode = updateResponse?.HttpStatusCode ?? HttpStatusCode.InternalServerError,
                 };
 
                 return lr;
@@ -94,7 +101,8 @@ namespace PantherParking.Data.DAL.Repositories
                 return new LocationResponse
                 {
                     ResponseMessage = ex.GetBaseException().Message,
-                    ResponseValue = false
+                    ResponseValue = false,
+                    HttpStatusCode = HttpStatusCode.InternalServerError,
                 };
             }//catch
 

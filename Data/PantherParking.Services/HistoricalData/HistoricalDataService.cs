@@ -1,4 +1,5 @@
 ﻿using PantherParking.Data.DAL.Interfaces;
+using PantherParking.Data.Models;
 using PantherParking.Data.Models.ResponseModels;
 
 namespace PantherParking.Services.HistoricalData
@@ -11,25 +12,15 @@ namespace PantherParking.Services.HistoricalData
         {
             this.historicalDataRepository = historicalDataRepository;
         }
-
-        public HistoricalDataResponse GetLastFiveWeeks()
+        
+        public HistoricalDataResponse GetWeeklyHistory(System.DateTime beginWeek, string garageID, string username, string token)
         {
-            return this.historicalDataRepository.GetLastFiveWeeks();
+            return this.historicalDataRepository.GetWeeklyHistory(beginWeek, garageID, username, token);
         }
 
-        public HistoricalDataResponse GetWeeklyHistory(int weekID)
+        public Garage[] GetSpacesAvailable(string sessionToken)
         {
-            return this.historicalDataRepository.GetWeeklyHistory(weekID);
-        }
-
-        public HistoricalDataResponse GetColor(int lot)
-        {
-            return this.GetColor(lot);
-        }
-
-        public HistoricalDataResponse GetSpacesAvailable(int lot)
-        {
-            return this.historicalDataRepository.GetSpacesAvailable(lot);
+            return this.historicalDataRepository.GetSpacesAvailable(sessionToken);
         }
     }
 }

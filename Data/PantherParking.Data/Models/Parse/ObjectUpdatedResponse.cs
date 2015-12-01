@@ -4,6 +4,6 @@ namespace PantherParking.Data.Models.Parse
 {
     public class ObjectUpdatedResponse : BaseModel
     {
-        public System.DateTime updatedAt { get; set; }
+        public System.DateTime? updatedAt { get; set; }
     }
 }

@@ -1,12 +1,12 @@
-﻿using PantherParking.Data.Models.ResponseModels;
+﻿using PantherParking.Data.Models;
+using PantherParking.Data.Models.ResponseModels;
 
 namespace PantherParking.Services.HistoricalData
 {
     public interface IHistoricalDataService
     {
-        HistoricalDataResponse GetLastFiveWeeks();
-        HistoricalDataResponse GetWeeklyHistory(int weekID);
-        HistoricalDataResponse GetColor(int lot);
-        HistoricalDataResponse GetSpacesAvailable(int lot);
+        HistoricalDataResponse GetWeeklyHistory(System.DateTime beginWeek, string garageID, string username,
+            string token);
+        Garage[] GetSpacesAvailable(string sessionToken);
     }
 }

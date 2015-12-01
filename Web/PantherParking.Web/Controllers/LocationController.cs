@@ -20,38 +20,53 @@ namespace PantherParking.Web.Controllers
         [Route("api/Location/checkIn")]
         public HttpResponseMessage PostCheckIn(CheckinRequest request)
         {
-            if (request == null)
+            //request.sessionToken = Request.Headers["sessionToken"];
+            try
             {
-                return base.CreateErrorEmptyResponse();
-            }//if
+                if (request == null || !base.LoginService.ValidateSession(request.sessionToken, request.username))
+                {
+                    return base.CreateErrorEmptyResponse();
+                }//if
 
-            User u = new User
+                User u = new User
+                {
+                    username = request.username,
+                    garageID = request.garageId,
+                    sessionToken = request.sessionToken,
+                };
+                LocationResponse response = this.LocationService.CheckIn(u);
+                return this.Request.CreateResponse(response?.HttpStatusCode ?? HttpStatusCode.InternalServerError, response);
+            }//try
+            catch (Exception)
             {
-                username = request.username,
-                garageID = request.garageId,
-                sessionToken = request.sessionToken,
-            };
-            LocationResponse response = this.LocationService.CheckIn(u);
-            return this.Request.CreateResponse(HttpStatusCode.OK, response);
+                return base.CreateUnknownErrorResponse();
+            }
         }
         
         //This is the checkin End Point 
         [Route("api/Location/checkOut")]
         public HttpResponseMessage PostCheckOut(CheckoutRequest request)
         {
-            if (request == null)
+            try
             {
-                return base.CreateErrorEmptyResponse();
-            }//if
+                if (request == null || !base.LoginService.ValidateSession(request.sessionToken, request.username))
+                {
+                    return base.CreateErrorEmptyResponse();
+                }//if
 
-            User u = new User
+                User u = new User
+                {
+                    username = request.username,
+                    sessionToken = request.sessionToken,
+                };
+
+                LocationResponse response = this.LocationService.CheckOut(u);
+                return this.Request.CreateResponse(HttpStatusCode.OK, response);
+            }//try
+            catch (Exception)
             {
-                username = request.username,
-                sessionToken = request.sessionToken,
-            };
-
-            LocationResponse response = this.LocationService.CheckOut(u);
-            return this.Request.CreateResponse(HttpStatusCode.OK, response);
+                return CreateUnknownErrorResponse();
+            }//catch
         }
     }
 }

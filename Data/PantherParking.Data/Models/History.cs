@@ -5,10 +5,8 @@ namespace PantherParking.Data.Models
 {
     public class History : BaseModel
     {
-        public string garageId { get; set; }
-        public AcademicCalendarSeason season { get; set; }
-        public System.DateTime beginWeek { get; set; }
-        public System.DateTime endWeek { get; set; }
+        public string garageID { get; set; }
+        //public AcademicCalendarSeason season { get; set; }
         public int countAt9 { get; set; }
         public int countAt10 { get; set; }
         public int countAt11 { get; set; }

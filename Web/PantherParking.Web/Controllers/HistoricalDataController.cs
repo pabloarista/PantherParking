@@ -15,38 +15,38 @@ namespace PantherParking.Web.Controllers
     public class HistoricalDataController : BaseController
     {
         public IHistoricalDataService HistoricalDataService { get; set; }
+        
+        ////This is the historicaldata End Point 
+        //[Route("api/HistoricalData/getWeeklyHistory")]
+        //public HttpResponseMessage PostGetWeeklyHistory(User user, int weekId)
+        //{
+        //    if (request == null || !base.LoginService.ValidateSession(request.sessionToken, request.username))
+        //    {
+        //        return base.CreateErrorEmptyResponse();
+        //    }//if
 
-        //This is the historicaldata End Point 
-        [Route("api/HistoricalData/getLastFiveWeeks")]
-        public HttpResponseMessage GetLastFiveWeeks(User user)
-        {
-            HistoricalDataResponse response = this.HistoricalDataService.GetLastFiveWeeks();
-            return this.Request.CreateResponse(HttpStatusCode.OK, response);
-        }
+        //    HistoricalDataResponse response = this.HistoricalDataService.GetWeeklyHistory(weekId);
+        //    return this.Request.CreateResponse(HttpStatusCode.OK, response);
+        //}
         
-        //This is the historicaldata End Point 
-        [Route("api/HistoricalData/getWeeklyHistory")]
-        public HttpResponseMessage PostGetWeeklyHistory(User user, int weekId)
-        {
-            HistoricalDataResponse response = this.HistoricalDataService.GetWeeklyHistory(weekId);
-            return this.Request.CreateResponse(HttpStatusCode.OK, response);
-        }
-        
-        //This is the historicaldata End Point 
-        [Route("api/HistoricalData/getColor")]
-        public HttpResponseMessage GetColor(int lotId)
-        {
-            HistoricalDataResponse response = this.HistoricalDataService.GetColor(lotId);
-            return this.Request.CreateResponse(HttpStatusCode.OK, response);
-        }
-        
-        //This is the historicaldata End Point 
-        [Route("api/HistoricalData/getSpacesAvailable")]
-        public HttpResponseMessage GetSpacesAvailable(int lotId)
-        {
-            HistoricalDataResponse response = this.HistoricalDataService.GetSpacesAvailable(lotId);
-            return this.Request.CreateResponse(HttpStatusCode.OK, response);
-        }
+        ////This is the historicaldata End Point 
+        //[Route("api/HistoricalData/getSpacesAvailable")]
+        //public HttpResponseMessage GetSpacesAvailable(int lotId)
+        //{
+        //    if (request == null || !base.LoginService.ValidateSession(request.sessionToken, request.username))
+        //    {
+        //        return base.CreateErrorEmptyResponse();
+        //    }//if
+
+        //    HistoricalDataResponse response = this.HistoricalDataService.GetSpacesAvailable(lotId);
+        //    return this.Request.CreateResponse(HttpStatusCode.OK, response);
+        //}
         
     }
 }
+
+namespace PantherParking.Web.Models.HistoricalData
+{
+
+}
+

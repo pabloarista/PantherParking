@@ -14,12 +14,32 @@ namespace PantherParking.Data.Models
     public class BaseModel : IBaseModel
     {
 
+        public BaseModel()
+        {
+            //only if we explicitly set this to false, will we not serailze objectId.
+            this.updateModel = true;
+        }
+
         public string objectId { get; set; }
 
+        public bool updateModel { get; set; }
+
+
+        public bool ShouldSerializecreatedAt()
+        {
+            return !this.updateModel;
+        }
+
+        public DateTime? createdAt { get; set; }
+
+        public bool ShouldSerializeupdateModel()
+        {
+            return false;
+        }
 
         public bool ShouldSerializeobjectId()
         {
-            return false;
+            return this.updateModel;
         }
 
         public string ToJson()
@@ -45,7 +65,7 @@ namespace PantherParking.Data.Models
 
         public XElement ToXml()
         {
-            string json = this.ToJson();
+            string json = "{value:" + this.ToJson() + "}";
             XmlDocument xmlDoc = JsonConvert.DeserializeXmlNode(json);
             XElement xml = XElement.Load(new XmlNodeReader(xmlDoc));
 

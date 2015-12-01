@@ -23,9 +23,9 @@ namespace PantherParking.Services.Login
             return this.loginRepository.Logout(userData);
         }
 
-        public bool ValidateSession(string token)
+        public bool ValidateSession(string sessionToken, string username)
         {
-            return this.loginRepository.ValidateSession(token);
+            return this.loginRepository.ValidateSession(sessionToken, username);
         }
     }
 }

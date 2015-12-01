@@ -13,14 +13,14 @@ namespace PantherParking.Services.Administration
             this.administrationRepository = administrationRepository;
         }
 
-        public bool SetAcademicCalendar(DateTime begin, DateTime end)
+        public bool SetAcademicCalendar(DateTime begin, DateTime end, string username, string sessionToken)
         {
-            return this.administrationRepository.SetAcademicCalendar(begin, end);
+            return this.administrationRepository.SetAcademicCalendar(begin, end, username, sessionToken);
         }
 
-        public bool SetHoliday(DateTime holiday)
+        public bool SetHoliday(DateTime holiday, string username, string sessionToken)
         {
-            return this.administrationRepository.SetHoliday(holiday);
+            return this.administrationRepository.SetHoliday(holiday, username, sessionToken);
         }
     }
 }

@@ -7,6 +7,6 @@ namespace PantherParking.Services.Login
     {
         LoginResponse Login(User userData);
         LoginResponse Logout(User userData);
-        bool ValidateSession(string token);
+        bool ValidateSession(string sessionToken, string username);
     }
 }

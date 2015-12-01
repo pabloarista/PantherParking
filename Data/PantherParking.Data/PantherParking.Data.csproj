@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\PantherParking.Data.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -87,8 +88,10 @@
     <Compile Include="Models\IBaseModel.cs" />
     <Compile Include="Models\ModelToDictionary.cs" />
     <Compile Include="Models\Parse\ObjectCreatedResponse.cs" />
+    <Compile Include="Models\Parse\ObjectGetAllResponse.cs" />
     <Compile Include="Models\Parse\ObjectUpdatedResponse.cs" />
     <Compile Include="Models\RequestLogin.cs" />
+    <Compile Include="Models\ResponseModels\BaseResponse.cs" />
     <Compile Include="Models\ResponseModels\HistoricalDataResponse.cs" />
     <Compile Include="Models\ResponseModels\LocationResponse.cs" />
     <Compile Include="Models\ResponseModels\LoginResponse.cs" />

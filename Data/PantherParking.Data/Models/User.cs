@@ -21,6 +21,16 @@ namespace PantherParking.Data.Models
         public bool emailVerified { get; set; }
         public DateTime createdAt { get; set; }
 
+        public bool ShouldSerializepassword()
+        {
+            return !base.updateModel;
+        }
+
+        public bool ShouldSerializesessionToken()
+        {
+            return !base.updateModel;
+        }
+
         public bool ShouldSerializeemailVerified()
         {
             return false;

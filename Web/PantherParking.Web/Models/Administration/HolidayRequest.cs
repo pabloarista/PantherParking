@@ -6,6 +6,6 @@ namespace PantherParking.Web.Models.Administration
     {
         public DateTime holiday { get; set; }
         public string username { get; set; }
-        public string token { get; set; }
+        public string sessionToken { get; set; }
     }
 }

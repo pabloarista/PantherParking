@@ -7,6 +7,6 @@ namespace PantherParking.Web.Models.Administration
         public DateTime begin { get; set; }
         public DateTime end { get; set; }
         public string username { get; set; }
-        public string token { get; set; }
+        public string sessionToken { get; set; }
     }
 }

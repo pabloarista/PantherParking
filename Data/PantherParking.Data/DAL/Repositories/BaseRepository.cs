@@ -21,7 +21,7 @@ namespace PantherParking.Data.DAL.Repositories
 {
     public class JsonTest
     {
-        
+
     }
     public class BaseRepository
     {
@@ -40,7 +40,7 @@ namespace PantherParking.Data.DAL.Repositories
                 email = "test@me.com",
                 garageID = "",
                 password = "test",
-                
+
             };
 
             //ResponseDatastore<ObjectCreatedResponse> rp = br.PostResponse<ObjectCreatedResponse>(u,
@@ -48,7 +48,7 @@ namespace PantherParking.Data.DAL.Repositories
 
             //ResponseDatastore<ObjectCreatedResponse> r = br.CreateObject<ObjectCreatedResponse>(u, "");
 
-            ResponseDatastore<User> rr = br.GetObject<User>("", new Dictionary<string, string>(1) {{"username", u.username}});
+            ResponseDatastore<ObjectGetAllResponse<User>> rr = br.GetObject<ObjectGetAllResponse<User>,  User>("", new Dictionary<string, string>(1) { { "username", u.username } });
 
 
         }
@@ -60,7 +60,9 @@ namespace PantherParking.Data.DAL.Repositories
             [Description("login")]
             Login = 2,
             [Description("users")]
-            Users = 4
+            Users = 4,
+            [Description("logout")]
+            Logout = 8
         }
 
         public ResponseDatastore<TResponseResult> PostResponse<TResponseResult>(
@@ -94,6 +96,27 @@ namespace PantherParking.Data.DAL.Repositories
                 url += contents.GetType().Name;
             }//if
 
+            if (httpMethod == HttpMethod.Get)
+            {
+                Type t = contents.GetType();
+                PropertyInfo[] props = t.GetProperties();
+                StringBuilder sb = new StringBuilder();
+
+                foreach (PropertyInfo pi in props)
+                {
+                    string name = pi.Name;
+                    string value = pi.GetValue(contents, null) + "";
+                    if (sb.Length != 0)
+                    {
+                        sb.Append("&");
+                    }//if
+                    sb.Append($"{name}={HttpUtility.UrlEncode(value)}");
+                }//foreach pi
+
+                url += "?" + sb;
+                contents = null;
+            }//if
+
             return this.RetrieveRestApiResponse<TResponseResult>(url, httpMethod, contents, token);
         }
 
@@ -102,6 +125,7 @@ namespace PantherParking.Data.DAL.Repositories
         protected static string AppID => ConfigurationManager.AppSettings["appID"];
         protected static string RestApiKey => ConfigurationManager.AppSettings["restApiKey"];
         protected static string DefaultParseHttpContentType => ConfigurationManager.AppSettings["defaultParseHttpContentType"];
+        protected static string MasterKey => ConfigurationManager.AppSettings["masterKey"];
 
         protected static string ParseUrlPrefix => $"{ConfigurationManager.AppSettings["parseRestApi"]}/{ConfigurationManager.AppSettings["parseVersion"]}/";
 
@@ -132,7 +156,11 @@ namespace PantherParking.Data.DAL.Repositories
         public ResponseDatastore<TResponseResult> ChangeObject<TResponseResult>(IBaseModel model, string token, HttpMethod httpMethod)
             where TResponseResult : IBaseModel
         {
-            string url = $"{BaseRepository.ParseUrlPrefix}classes/{model.GetType().Name}/{model.objectId}";
+            Type t = model.GetType();
+            string className = t == typeof(User)
+                ? "_User"
+                : t.Name;
+            string url = $"{BaseRepository.ParseUrlPrefix}classes/{className}/{model.objectId}";
 
             ResponseDatastore<TResponseResult> r = this.RetrieveRestApiResponse<TResponseResult>(url, httpMethod, model, token);
 
@@ -150,11 +178,27 @@ namespace PantherParking.Data.DAL.Repositories
             return this.ChangeObject<TResponseResult>(model, token, HttpMethod.Delete);
         }
 
-        public ResponseDatastore<TResponseResult> GetObject<TResponseResult>(string token,
+        public ResponseDatastore<TResponseResult> GetObjects<TResponseResult, TResponseArray>(string token)
+            where TResponseResult : IBaseModel
+        {
+            Type t = typeof(TResponseArray);
+            string className = t == typeof(User)
+                ? "_User"
+                : typeof(TResponseArray).Name;
+
+            string url = BaseRepository.ParseUrlPrefix + "classes/" + className;
+
+            ResponseDatastore<TResponseResult> r = this.RetrieveRestApiResponse<TResponseResult>(url, HttpMethod.Get, null,
+                token);
+
+            return r;
+        }
+
+        public ResponseDatastore<TResponseResult> GetObject<TResponseResult, TResponseArray>(string token,
             Dictionary<string, string> constraints)
             where TResponseResult : IBaseModel
         {
-            string className = typeof(TResponseResult) == typeof(User) ? "_User" :  typeof (TResponseResult).Name;
+            string className = typeof(TResponseArray) == typeof(User) ? "_User" : typeof(TResponseArray).Name;
             string urlPrefix = BaseRepository.ParseUrlPrefix + "classes/" + className + "?where=";
             StringBuilder sbUrl = new StringBuilder("{");
             bool begin = true;
@@ -196,6 +240,8 @@ namespace PantherParking.Data.DAL.Repositories
         {
             HttpWebRequest request = null;
             HttpWebResponse response = null;
+            Stream requestStream = null;
+            Stream responseStream = null;
             try
             {
                 ServicePointManager.ServerCertificateValidationCallback =
@@ -205,11 +251,12 @@ namespace PantherParking.Data.DAL.Repositories
                 request = (HttpWebRequest)WebRequest.Create(url);
 
                 request.Method = BaseRepository.GetEnumDescription(httpMethod);
-                
+
 
                 #region headers
                 request.Headers.Add("X-Parse-Application-Id", BaseRepository.AppID);
                 request.Headers.Add("X-Parse-REST-API-Key", BaseRepository.RestApiKey);
+                request.Headers.Add("X-Parse-Master-Key", BaseRepository.MasterKey);
                 if (!string.IsNullOrWhiteSpace(token))
                 {
                     //sample token:
@@ -229,8 +276,9 @@ namespace PantherParking.Data.DAL.Repositories
                 if (contents != null)
                 {
                     request.ContentType = BaseRepository.DefaultParseHttpContentType;
+                    requestStream = request.GetRequestStream();
 
-                    using (StreamWriter writer = new StreamWriter(request.GetRequestStream()))
+                    using (StreamWriter writer = new StreamWriter(requestStream))
                     {
                         string json = contents.ToJson();
                         writer.WriteLine(json);
@@ -248,12 +296,12 @@ namespace PantherParking.Data.DAL.Repositories
                 {
                     response = (HttpWebResponse)err.Response;
                 }
-                
+
                 string parseResponse = null;
-                Stream s = response.GetResponseStream();
-                if (s != null)
+                responseStream = response.GetResponseStream();
+                if (responseStream != null)
                 {
-                    using (var streamReader = new StreamReader(s))
+                    using (var streamReader = new StreamReader(responseStream))
                     {
                         parseResponse = streamReader.ReadToEnd();
                     }
@@ -277,9 +325,23 @@ namespace PantherParking.Data.DAL.Repositories
             }
             finally
             {
-                request?.GetRequestStream().Close();
-                Stream responseStream = response?.GetResponseStream();
-                responseStream?.Close();
+                try
+                {
+                    requestStream?.Close();
+                }
+                catch (Exception)
+                {
+
+                }
+                try
+                {
+
+                    responseStream?.Close();
+                }
+                catch (Exception)
+                {
+
+                }
             }
         }
     }
