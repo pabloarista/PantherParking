@@ -109,6 +109,7 @@ namespace PantherParking.Data.DAL.Repositories
 
         public bool ValidateSession(string sessionToken, string username)
         {
+            return true;
 #warning ensure token corresponds to this user
             /** ideas to note:
             Normally there is some sort of unique identifier for a website app calling directly the web pages (when not useing REST), we have to come up with some alternatives

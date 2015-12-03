@@ -1,10 +1,9 @@
 ﻿using System;
-//using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PantherParking.Data.DAL.Repositories;
-using PantherParking.Data.Models;
-using PantherParking.Data.Models.ResponseModels;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
-namespace PantherParking.Data.Tests
+using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
+
+namespace PantherParking.Data.UnitTests
 {
     [TestFixture]
     public class LocationRepositoryTest
@@ -16,14 +15,14 @@ namespace PantherParking.Data.Tests
             this.locationRepository = new LocationRepository();
         }
 
-        //[TestMethod]
-        public void CheckInTest()
+        [Test]
+        public void SunnyCheckInTest()
         {
-            User data = new User
+            CheckIn data = new CheckIn
             {
-                sessionToken = "",
-                garageID = "",
-                username = "pantherdude"
+                Token = Guid.NewGuid() + "",
+                GarageId = "PG5",
+                Username = "pantherdude"
             };
 
             LocationResponse lr = this.locationRepository.CheckIn(data);
@@ -35,14 +34,31 @@ namespace PantherParking.Data.Tests
             Assert.IsTrue(string.IsNullOrWhiteSpace(lr.ResponseMessage));
         }
 
-        //[TestMethod]
-        public void CheckOutTest()
+        [Test]
+        public void RainyCheckInTest()
         {
-            User data = new User
+            CheckIn data = new CheckIn
             {
-                sessionToken = "",
-                garageID = "",
-                username = "pantherdude"
+                Token = "",
+                GarageId = "PG5",
+                Username = "Whatever"
+            };
+
+            LocationResponse lr = this.locationRepository.CheckIn(data);
+
+            Assert.IsNotNull(lr);
+
+            Assert.IsFalse(lr.ResponseValue);
+        }
+
+        [Test]
+        public void SunnyCheckOutTest()
+        {
+            CheckIn data = new CheckIn
+            {
+                Token = Guid.NewGuid() + "",
+                GarageId = "PG5",
+                Username = "pantherdude"
             };
 
             LocationResponse lr = this.locationRepository.CheckOut(data);
@@ -52,6 +68,23 @@ namespace PantherParking.Data.Tests
             Assert.IsTrue(lr.ResponseValue);
 
             Assert.IsTrue(string.IsNullOrWhiteSpace(lr.ResponseMessage));
+        }
+
+        [Test]
+        public void RainyCheckOutTest()
+        {
+            CheckIn data = new CheckIn
+            {
+                Token = "",
+                GarageId = "PG5",
+                Username = "Whatever"
+            };
+
+            LocationResponse lr = this.locationRepository.CheckOut(data);
+
+            Assert.IsNotNull(lr);
+
+            Assert.IsFalse(lr.ResponseValue);
         }
     }
 }

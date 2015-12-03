@@ -21,7 +21,7 @@ namespace PantherParking.Data.DAL.Repositories
             {
                 ResponseDatastore<ObjectGetAllResponse<User>> userExistsParse = this.ValidateUserRegistration(user);
 
-                if (string.IsNullOrWhiteSpace(userExistsParse?.ResponseBody?.results?[0]?.username))
+                if (userExistsParse?.ResponseBody?.results?.Length < 1 || string.IsNullOrWhiteSpace(userExistsParse?.ResponseBody?.results?[0]?.username))
                 {
                     user.updateModel = false;
                     ResponseDatastore<ObjectCreatedResponse> rp = base.PostResponse<ObjectCreatedResponse>(user, null, DatastoreType.Users);
